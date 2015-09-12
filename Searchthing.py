@@ -28,13 +28,7 @@ class Ducks:
         self.searchURL = "http://classic.jisho.org/words?jap=" + self.searchTerm + "&eng=&dict=edict"
 
     def get_data_from_internet(self):
-
-
         self.search_result_as_html=self.urllib2.urlopen(self.searchURL)
-
-
-        #raw_result = self.requests.get(self.searchURL)
-        #self.search_result_as_html = raw_result.text
 
     def organize_results(self):
         soup = self.BeautifulSoup(self.search_result_as_html, "html.parser")

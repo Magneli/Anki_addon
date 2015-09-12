@@ -1,4 +1,4 @@
-class Ducks:
+class Search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
@@ -17,11 +17,13 @@ class Ducks:
         self.prepare_results()
 
     def prepare_results(self):
-
-        self.make_search_url()
-        self.get_data_from_internet()
-        self.organize_results()
-        self.count_results()
+        try:
+            self.make_search_url()
+            self.get_data_from_internet()
+            self.organize_results()
+            self.count_results()
+        except self.urllib2.URLError:
+            pass
 
 
     def make_search_url(self):
@@ -78,7 +80,7 @@ read = "kanashii"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))
-    ducks = Ducks(read)
+    ducks = Search_handler(read)
     print(ducks.result_count)
     for x in range(0, ducks.result_count):
         print(ducks.get_kanji(x) + ":" + ducks.get_reading(x))

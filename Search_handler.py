@@ -2,37 +2,33 @@ class Search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
-    #import requests
+
     from bs4 import BeautifulSoup
     import urllib2
-
-    def __init__(self, search_term):
-        self.searchTerm = search_term
+    def __init__(self):
 
         self.MAX_RESULTS = 20
         self.organized_results = None
         self.searchURL = None
         self.search_result_as_html = None
         self.result_count = 0
-        self.prepare_results()
 
-    def prepare_results(self):
-        try:
-            self.make_search_url()
-            self.get_data_from_internet()
-            self.organize_results()
-            self.count_results()
-        except self.urllib2.URLError:
-            pass
+    def search(self, search_term):
+        self.search_result = Search_result()
+        self.make_search_url(search_term)
+        self.get_data_from_internet()
+        self.organize_data_into_soup()
+        self.count_results()
+        self.store_results_from_soup()
+        return self.search_result
 
-
-    def make_search_url(self):
-        self.searchURL = "http://classic.jisho.org/words?jap=" + self.searchTerm + "&eng=&dict=edict"
+    def make_search_url(self, search_term):
+        self.searchURL = "http://classic.jisho.org/words?jap=" + search_term + "&eng=&dict=edict"
 
     def get_data_from_internet(self):
-        self.search_result_as_html=self.urllib2.urlopen(self.searchURL)
+        self.search_result_as_html = self.urllib2.urlopen(self.searchURL)
 
-    def organize_results(self):
+    def organize_data_into_soup(self):
         soup = self.BeautifulSoup(self.search_result_as_html, "html.parser")
         self.organized_results = soup.find_all('td')
 
@@ -42,9 +38,15 @@ class Search_handler:
                 self.organized_results[counter * 5]
             except IndexError:
                 break
-            self.result_count = counter + 1
+            self.search_result.result_count = counter + 1
 
-    def get_kanji(self, number):
+    def store_results_from_soup(self):
+        for i in range(0, self.search_result.result_count):
+            self.search_result.set_expression_number(self.get_expression(i))
+            self.search_result.set_reading_number(self.get_reading(i))
+            self.search_result.set_meaning_number(self.get_meaning(i))
+
+    def get_expression(self, number):
         try:
             return self.organized_results[number * 5].span.span.string + \
                    self.organized_results[number * 5].span.contents[1].rstrip()
@@ -74,14 +76,40 @@ class Search_handler:
                 return result.rstrip()
 
 
+class Search_result:
+    def __init__(self):
+        self.expression = []
+        self.reading = []
+        self.meaning = []
+        self.result_count = None
+
+    def set_expression_number(self, result):
+        self.expression.append(result)
+
+    def set_reading_number(self, result):
+        self.reading.append(result)
+
+    def set_meaning_number(self, result):
+        self.meaning.append(result)
+
+    def get_expression_number(self, number):
+        return self.expression[number]
+
+    def get_reading_number(self, number):
+        return self.reading[number]
+
+    def get_meaning_number(self, number):
+        return self.meaning[number]
 
 
 read = "kanashii"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))
-    ducks = Search_handler(read)
-    print(ducks.result_count)
-    for x in range(0, ducks.result_count):
-        print(ducks.get_kanji(x) + ":" + ducks.get_reading(x))
-        print( ducks.get_meaning(x))
+
+    ducks = Search_handler()
+    result = ducks.search(read)
+    print(result.result_count)
+    for x in range(0, result.result_count):
+        print(result.get_expression_number(x) + ":" + result.get_reading_number(x))
+        print(result.get_meaning_number(x))

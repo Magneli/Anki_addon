@@ -5,7 +5,7 @@ from aqt.utils import showInfo
 # import all of the Qt GUI library
 from aqt.qt import *
 from anki import Collection
-import Searchthing
+import Search_handler
 
 
 
@@ -25,8 +25,10 @@ def testFunction():
 
 
     note = card.note()
-    taberu = Searchthing.Ducks("taberu")
-    showInfo(taberu.get_kanji(0))
+    searcher = Search_handler.Search_handler()
+    taberu = searcher.search("taberu")
+    if taberu.result_count>0:
+        showInfo(taberu.get_expression_number(0))
     for id in ids:
         result =""
         card = mw.col.getCard(id)
@@ -35,7 +37,7 @@ def testFunction():
         for (name, value) in note.items():
             result+=value
 
-        showInfo(result)
+        #showInfo(result)
 
 
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
@@ -42,9 +43,12 @@ class Search_handler:
 
     def store_results_from_soup(self):
         for i in range(0, self.search_result.result_count):
-            self.search_result.set_expression_number(self.get_expression(i))
-            self.search_result.set_reading_number(self.get_reading(i))
-            self.search_result.set_meaning_number(self.get_meaning(i))
+            self.save_result_in_object(i)
+
+    def save_result_in_object(self, number):
+        self.search_result.add_expression(self.get_expression(number))
+        self.search_result.add_reading(self.get_reading(number))
+        self.search_result.add_meaning(self.get_meaning(number))
 
     def get_expression(self, number):
         try:
@@ -70,10 +74,10 @@ class Search_handler:
             try:
                 for index in range(0, 100):
                     if str(self.organized_results[(number * 5) + 2].contents[index]) == "<br/>":
-                        result += self.organized_results[(number * 5) + 2].contents[index - 1].lstrip()
+                        result += self.organized_results[(number * 5) + 2].contents[index - 1].strip()
                         result += "\n"
             except IndexError:
-                return result.rstrip()
+                return result.strip()
 
 
 class Search_result:
@@ -81,15 +85,15 @@ class Search_result:
         self.expression = []
         self.reading = []
         self.meaning = []
-        self.result_count = None
+        self.result_count = 0
 
-    def set_expression_number(self, result):
+    def add_expression(self, result):
         self.expression.append(result)
 
-    def set_reading_number(self, result):
+    def add_reading(self, result):
         self.reading.append(result)
 
-    def set_meaning_number(self, result):
+    def add_meaning(self, result):
         self.meaning.append(result)
 
     def get_expression_number(self, number):
@@ -108,6 +112,7 @@ if __name__ == '__main__':
     print('test {}'.format('code'))
 
     ducks = Search_handler()
+    asd = ducks.search("asd")
     result = ducks.search(read)
     print(result.result_count)
     for x in range(0, result.result_count):

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # import the main window object (mw) from ankiqt
 from aqt import mw
 # import the "show info" tool from utils.py
@@ -6,7 +7,6 @@ from aqt.utils import showInfo
 from aqt.qt import *
 from anki import Collection
 import Search_handler
-
 
 
 
@@ -27,6 +27,7 @@ def testFunction():
     note = card.note()
     searcher = Search_handler.Search_handler()
     taberu = searcher.search("taberu")
+    ducks  = searcher.search("kiku")
     if taberu.result_count>0:
         showInfo(taberu.get_expression_number(0))
     for id in ids:

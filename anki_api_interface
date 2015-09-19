@@ -6,4 +6,3 @@ from aqt.utils import showInfo
 from aqt.qt import *
 from anki import Collection
 
-def

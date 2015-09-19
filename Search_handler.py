@@ -17,7 +17,10 @@ class Search_handler:
     def search(self, search_term):
         self.search_result = Search_result()
         self.make_search_url(search_term)
-        self.get_data_from_internet()
+
+        if not self.get_data_from_internet():
+            return self.search_result
+
         self.organize_data_into_soup()
         self.count_results()
         self.store_results_from_soup()
@@ -27,7 +30,11 @@ class Search_handler:
         self.searchURL = "http://classic.jisho.org/words?jap=" + search_term + "&eng=&dict=edict"
 
     def get_data_from_internet(self):
-        self.search_result_as_html = self.urllib2.urlopen(self.searchURL)
+        try:
+            self.search_result_as_html = self.urllib2.urlopen(self.searchURL)
+            return True
+        except self.urllib2.URLError:
+            return False
 
     def organize_data_into_soup(self):
         soup = self.BeautifulSoup(self.search_result_as_html, "html.parser")
@@ -46,11 +53,11 @@ class Search_handler:
             self.save_result_in_object(i)
 
     def save_result_in_object(self, number):
-        self.search_result.add_expression(self.get_expression(number))
-        self.search_result.add_reading(self.get_reading(number))
-        self.search_result.add_meaning(self.get_meaning(number))
+        self.search_result.add_expression(self.get_expression_from_soup(number))
+        self.search_result.add_reading(self.get_reading_from_soup(number))
+        self.search_result.add_meaning(self.get_meaning_from_soup(number))
 
-    def get_expression(self, number):
+    def get_expression_from_soup(self, number):
         try:
             return self.organized_results[number * 5].span.span.string + \
                    self.organized_results[number * 5].span.contents[1].rstrip()
@@ -59,14 +66,14 @@ class Search_handler:
         except AttributeError:
             return self.organized_results[number * 5].span.string.rstrip()
 
-    def get_reading(self, number):
+    def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:
             return self.organized_results[(number * 5) + 1].span.string + \
                    self.organized_results[(number * 5) + 1].contents[1].rstrip()
         else:
             return self.organized_results[(number * 5) + 1].string.rstrip().rstrip()
 
-    def get_meaning(self, number):
+    def get_meaning_from_soup(self, number):
         if self.organized_results[(number * 5) + 2].string is not None:
             return self.organized_results[(number * 5) + 2].string.rstrip()
         else:

@@ -7,7 +7,7 @@ from aqt.utils import showInfo
 from aqt.qt import *
 from anki import Collection
 import Search_handler
-
+import anki_api_interface
 
 
 
@@ -28,17 +28,24 @@ def testFunction():
     searcher = Search_handler.Search_handler()
     taberu = searcher.search("taberu")
     ducks  = searcher.search("kiku")
-    if taberu.result_count>0:
-        showInfo(taberu.get_expression_number(0))
-    for id in ids:
-        result =""
-        card = mw.col.getCard(id)
-        note = card.note()
 
-        for (name, value) in note.items():
-            result+=value
+    list = ["asd", "yay"]
+    result =""
+    card = mw.col.getCard(ids[0])
+    note = card.note()
+    #showInfo(note.items())
 
-        #showInfo(result)
+    showInfo(note.model())
+    for (name, value) in note.items():
+        result+=name
+
+    #showInfo(note.items()[0][0])
+    #showInfo(note.items()[1][0])
+    #showInfo(note.items()[2][0])
+
+    #showInfo(note.items()[0][1])
+    #showInfo(note.items()[1][1])
+    #showInfo(note.items()[2][1])
 
 
 

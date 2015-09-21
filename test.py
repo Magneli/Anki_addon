@@ -8,12 +8,20 @@ from aqt.qt import *
 from anki import Collection
 import Search_handler
 import anki_api_interface
-import time
-
 
 def testFunction():
-    #anki_api_interface.add_word_card("yay", "space","ducks")
 
+    ids = anki_api_interface.find_cards("exp123")
+    card = anki_api_interface.get_card(ids[0])
+    note = card.note()
+
+    showInfo(note.items()[0][0])
+    showInfo(note.items()[1][0])
+    showInfo(note.items()[2][0])
+
+    showInfo(note.items()[0][1]) #exp
+    showInfo(note.items()[1][1]) #read
+    showInfo(note.items()[2][1]) #mean
 
 
 

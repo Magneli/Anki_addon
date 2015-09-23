@@ -10,19 +10,3 @@ from anki import Collection
 import Search_handler
 import anki_api_interface
 
-def testFunction():
-    pass
-
-
-
-
-
-
-
-
-
-
-
-action = QAction("test", mw)
-mw.connect(action, SIGNAL("triggered()"), testFunction)
-mw.form.menuTools.addAction(action)

@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#python 2.7
 class Search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))

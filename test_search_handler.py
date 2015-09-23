@@ -1,10 +1,11 @@
 # -*- coding: utf-8 -*-
+#python 2.7
 from unittest import TestCase
-
+import time
 __author__ = 'Magne Limi'
 
 from Search_handler import Search_handler
-
+import datetime
 
 class TestSearch_handler(TestCase):
     def test_no_result(self):
@@ -48,3 +49,10 @@ class TestSearch_handler(TestCase):
         self.assertEqual(u'たべる', search_result_object.get_reading_number(1))
         self.assertEqual(u'to eat;\nto live on (e.g. a salary); to live off; to subsist on',
                          search_result_object.get_meaning_number(1))
+
+d = datetime.datetime.today()
+d -= datetime.timedelta(hours=4)
+d = datetime.datetime(d.year, d.month, d.day)
+d += datetime.timedelta(hours=4)
+print(int(time.time())-int(time.mktime(d.timetuple()))//86400)
+print(int(time.time() - time.mktime(d.timetuple()) // 86400)+60)

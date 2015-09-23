@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#python 2.7
 # import the main window object (mw) from ankiqt
 from aqt import mw
 # import the "show info" tool from utils.py
@@ -10,18 +11,8 @@ import Search_handler
 import anki_api_interface
 
 def testFunction():
+    pass
 
-    ids = anki_api_interface.find_cards("exp123")
-    card = anki_api_interface.get_card(ids[0])
-    note = card.note()
-
-    showInfo(note.items()[0][0])
-    showInfo(note.items()[1][0])
-    showInfo(note.items()[2][0])
-
-    showInfo(note.items()[0][1]) #exp
-    showInfo(note.items()[1][1]) #read
-    showInfo(note.items()[2][1]) #mean
 
 
 

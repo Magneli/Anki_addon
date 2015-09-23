@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#python 2.7
 #  import the main window object (mw) from ankiqt
 from aqt import mw
 # import the "show info" tool from utils.py
@@ -6,6 +7,7 @@ from aqt.utils import showInfo
 # import all of the Qt GUI library
 from aqt.qt import *
 from anki import Collection
+
 
 deck_name = "Test"
 
@@ -44,17 +46,19 @@ def add_word_card(expression, reading, meaning):
     card.col.addNote(note)
     note.flush()
 
+
 def _find_sample_card_for_card_creation():
-    ids = find_cards("deck:"+deck_name)
+    ids = find_cards("deck:" + deck_name)
     for id in ids:
         if get_deck_name(get_card(id)) == deck_name:
             return get_card(id)
 
+
 def reset_card_due_stats(card):
-    card.queue = 1
+    card.queue = 2
     card.type = 2
-    card.due = card.col.sched.today
+    card.due = mw.col.sched.today
     card.ivl = 1
     card.factor = 2500
-    card.col.sched._updateStats(card, 'lrn')
+    card.col.sched._updateStats(card, 'rev')
     card.flushSched()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#python 2.7
+# python 2.7
 class Jp_to_eng_word_search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
@@ -69,14 +69,18 @@ class Jp_to_eng_word_search_handler:
 
     def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:
-            return self.organized_results[(number * 5) + 1].span.string + \
-                   self.organized_results[(number * 5) + 1].contents[1].rstrip()
+
+            try:
+                return self.organized_results[(number * 5) + 1].span.string + \
+                       self.organized_results[(number * 5) + 1].contents[1].rstrip()
+            except TypeError:
+                return self.organized_results[(number * 5) + 1].span.string
         else:
             return self.organized_results[(number * 5) + 1].string.rstrip().rstrip()
 
     def get_meaning_from_soup(self, number):
         if self.organized_results[(number * 5) + 2].string is not None:
-            return self.organized_results[(number * 5) + 2].string.rstrip()
+            return self.organized_results[(number * 5) + 2].string.strip()
         else:
             result = ""
             try:
@@ -114,7 +118,7 @@ class Search_result:
         return self.meaning[number]
 
 
-read = "kanashii"
+read = "a"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))

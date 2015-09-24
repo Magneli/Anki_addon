@@ -9,6 +9,8 @@ from aqt.qt import *
 from anki import Collection
 import sys
 import anki_api_interface
+
+
 from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
 def testFunction():
     searcher = Jp_to_eng_word_search_handler()
@@ -16,24 +18,22 @@ def testFunction():
     mw.myWidget = widget = QWidget()
     widget.resize(600, 400)
 
-
     textbox = QLineEdit(widget)
-    #textbox.move(20, 20)
-    textbox.resize(280,40)
+    textbox.resize(400,30)
+
     button = QPushButton('Click me', widget)
-    button.move(300,0)
+    button.move(500,0)
 
-    @pyqtSlot()
+
     def on_click():
-        #textbox.setText("Button clicked.")
-        #table(searcher.search(textbox.text()))
         asd = searcher.get_search_result(textbox.text())
-
+        textbox.setText("")
         showInfo(asd.get_expression_number(0))
+
     button.clicked.connect(on_click)
+    button.setShortcut(QKeySequence("return"))
 
 
-    # Show window
     widget.show()
 
 def table(search_result):

@@ -10,7 +10,7 @@ import datetime
 class TestSearch_handler(TestCase):
     def test_no_result(self):
         searcher_handler = Search_handler()
-        search_result_object = searcher_handler.search("nonsensicalgibberish")
+        search_result_object = searcher_handler.get_search_result("nonsensicalgibberish")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
         self.assertEqual([], search_result_object.reading)
@@ -18,7 +18,7 @@ class TestSearch_handler(TestCase):
 
     def test_empty_search_term(self):
         searcher_handler = Search_handler()
-        search_result_object = searcher_handler.search("")
+        search_result_object = searcher_handler.get_search_result("")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
         self.assertEqual([], search_result_object.reading)
@@ -26,7 +26,7 @@ class TestSearch_handler(TestCase):
 
     def test_nasty_example(self):
         searcher_handler = Search_handler()
-        search_result_object = searcher_handler.search("掛ける")
+        search_result_object = searcher_handler.get_search_result("掛ける")
         self.assertEqual(1, search_result_object.result_count)
         self.assertEqual(u'掛ける', search_result_object.get_expression_number(0))
         self.assertEqual(u'かける', search_result_object.get_reading_number(0))
@@ -38,7 +38,7 @@ class TestSearch_handler(TestCase):
 
     def test_simple_example(self):
         searcher_handler = Search_handler()
-        search_result_object = searcher_handler.search("taberu")
+        search_result_object = searcher_handler.get_search_result("taberu")
         self.assertEqual(2, search_result_object.result_count)
         self.assertEqual(u'食べる', search_result_object.get_expression_number(0))
         self.assertEqual(u'たべる', search_result_object.get_reading_number(0))

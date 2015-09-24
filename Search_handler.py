@@ -15,7 +15,7 @@ class Search_handler:
         self.search_result_as_html = None
         self.result_count = 0
 
-    def search(self, search_term):
+    def get_search_result(self, search_term):
         self.search_result = Search_result()
         self.make_search_url(search_term)
 
@@ -23,7 +23,7 @@ class Search_handler:
             return self.search_result
 
         self.organize_data_into_soup()
-        self.count_results()
+        self.get_result_count()
         self.store_results_from_soup()
         return self.search_result
 
@@ -41,7 +41,7 @@ class Search_handler:
         soup = self.BeautifulSoup(self.search_result_as_html, "html.parser")
         self.organized_results = soup.find_all('td')
 
-    def count_results(self):
+    def get_result_count(self):
         for counter in range(0, self.MAX_RESULTS):
             try:
                 self.organized_results[counter * 5]
@@ -120,8 +120,8 @@ if __name__ == '__main__':
     print('test {}'.format('code'))
 
     ducks = Search_handler()
-    asd = ducks.search("asd")
-    result = ducks.search(read)
+    asd = ducks.get_search_result("asd")
+    result = ducks.get_search_result(read)
     print(result.result_count)
     for x in range(0, result.result_count):
         print(result.get_expression_number(x) + ":" + result.get_reading_number(x))

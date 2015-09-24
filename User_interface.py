@@ -9,9 +9,9 @@ from aqt.qt import *
 from anki import Collection
 import sys
 import anki_api_interface
-from Search_handler import Search_handler
+from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
 def testFunction():
-    searcher = Search_handler()
+    searcher = Jp_to_eng_word_search_handler()
 
     mw.myWidget = widget = QWidget()
     widget.resize(600, 400)

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 #python 2.7
-class Search_handler:
+class Jp_to_eng_word_search_handler:
     import os, sys
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
@@ -119,7 +119,7 @@ read = "kanashii"
 if __name__ == '__main__':
     print('test {}'.format('code'))
 
-    ducks = Search_handler()
+    ducks = Jp_to_eng_word_search_handler()
     asd = ducks.get_search_result("asd")
     result = ducks.get_search_result(read)
     print(result.result_count)

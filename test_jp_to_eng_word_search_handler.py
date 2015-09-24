@@ -4,12 +4,12 @@ from unittest import TestCase
 import time
 __author__ = 'Magne Limi'
 
-from Search_handler import Search_handler
+from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
 import datetime
 
-class TestSearch_handler(TestCase):
+class TestJp_to_eng_word_search_handler(TestCase):
     def test_no_result(self):
-        searcher_handler = Search_handler()
+        searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.get_search_result("nonsensicalgibberish")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
@@ -17,7 +17,7 @@ class TestSearch_handler(TestCase):
         self.assertEqual([], search_result_object.meaning)
 
     def test_empty_search_term(self):
-        searcher_handler = Search_handler()
+        searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.get_search_result("")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
@@ -25,7 +25,7 @@ class TestSearch_handler(TestCase):
         self.assertEqual([], search_result_object.meaning)
 
     def test_nasty_example(self):
-        searcher_handler = Search_handler()
+        searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.get_search_result("掛ける")
         self.assertEqual(1, search_result_object.result_count)
         self.assertEqual(u'掛ける', search_result_object.get_expression_number(0))
@@ -37,7 +37,7 @@ class TestSearch_handler(TestCase):
 
 
     def test_simple_example(self):
-        searcher_handler = Search_handler()
+        searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.get_search_result("taberu")
         self.assertEqual(2, search_result_object.result_count)
         self.assertEqual(u'食べる', search_result_object.get_expression_number(0))
@@ -50,9 +50,3 @@ class TestSearch_handler(TestCase):
         self.assertEqual(u'to eat;\nto live on (e.g. a salary); to live off; to subsist on',
                          search_result_object.get_meaning_number(1))
 
-d = datetime.datetime.today()
-d -= datetime.timedelta(hours=4)
-d = datetime.datetime(d.year, d.month, d.day)
-d += datetime.timedelta(hours=4)
-print(int(time.time())-int(time.mktime(d.timetuple()))//86400)
-print(int(time.time() - time.mktime(d.timetuple()) // 86400)+60)

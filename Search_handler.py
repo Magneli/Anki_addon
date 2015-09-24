@@ -16,16 +16,16 @@ class Search_handler:
         self.result_count = 0
 
     def get_search_result(self, search_term):
-        self.search_result = Search_result()
+        self.result_object = Search_result()
         self.make_search_url(search_term)
 
         if not self.get_data_from_internet():
-            return self.search_result
+            return self.result_object
 
         self.organize_data_into_soup()
         self.get_result_count()
         self.store_results_from_soup()
-        return self.search_result
+        return self.result_object
 
     def make_search_url(self, search_term):
         self.searchURL = "http://classic.jisho.org/words?jap=" + search_term + "&eng=&dict=edict"
@@ -47,16 +47,16 @@ class Search_handler:
                 self.organized_results[counter * 5]
             except IndexError:
                 break
-            self.search_result.result_count = counter + 1
+            self.result_object.result_count = counter + 1
 
     def store_results_from_soup(self):
-        for i in range(0, self.search_result.result_count):
+        for i in range(0, self.result_object.result_count):
             self.save_result_in_object(i)
 
     def save_result_in_object(self, number):
-        self.search_result.add_expression(self.get_expression_from_soup(number))
-        self.search_result.add_reading(self.get_reading_from_soup(number))
-        self.search_result.add_meaning(self.get_meaning_from_soup(number))
+        self.result_object.add_expression(self.get_expression_from_soup(number))
+        self.result_object.add_reading(self.get_reading_from_soup(number))
+        self.result_object.add_meaning(self.get_meaning_from_soup(number))
 
     def get_expression_from_soup(self, number):
         try:
@@ -95,14 +95,14 @@ class Search_result:
         self.meaning = []
         self.result_count = 0
 
-    def add_expression(self, result):
-        self.expression.append(result)
+    def add_expression(self, word):
+        self.expression.append(word)
 
-    def add_reading(self, result):
-        self.reading.append(result)
+    def add_reading(self, word):
+        self.reading.append(word)
 
-    def add_meaning(self, result):
-        self.meaning.append(result)
+    def add_meaning(self, word):
+        self.meaning.append(word)
 
     def get_expression_number(self, number):
         return self.expression[number]

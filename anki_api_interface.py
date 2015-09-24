@@ -38,10 +38,10 @@ def is_card_in_deck(expression, reading):
 def add_word_card(expression, reading, meaning):
     card = _find_sample_card_for_card_creation()
     note = card.col.newNote()
-    list = (expression, reading, meaning, "", "")
+    new_card_data = (expression, reading, meaning, "", "")
     i = 0
     for (name, value) in note.items():
-        note[name] = value + list[i]
+        note[name] = value + new_card_data[i]
         i += 1
     card.col.addNote(note)
     note.flush()
@@ -59,6 +59,6 @@ def reset_card_due_stats(card):
     card.type = 2
     card.due = mw.col.sched.today
     card.ivl = 1
-    card.factor = 2500
+    card.factor = 1000
     card.col.sched._updateStats(card, 'rev')
     card.flushSched()

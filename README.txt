@@ -4,4 +4,3 @@ Dictionary plugin for anki(http://ankisrs.net/)
 
 Libraries:
     BeautifulSoup
-    urllib2

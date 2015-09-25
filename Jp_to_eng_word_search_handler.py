@@ -117,6 +117,9 @@ class Search_result:
     def get_meaning_number(self, number):
         return self.meaning[number]
 
+    def get_result_count(self):
+        return self.result_count
+
 
 read = "a"
 

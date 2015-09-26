@@ -11,6 +11,12 @@ import anki_api_interface
 
 
 class Hotkeys():
+    def do_stuff(self, exp, reading, meaning):
+        if exp != "":
+            anki_api_interface.add_word_card(exp, reading, meaning)
+        else:
+            anki_api_interface.add_word_card(reading, reading, meaning)
+
     def __init__(self, parent):
         self.parent = parent
         self.button1()
@@ -33,7 +39,6 @@ class Hotkeys():
         self.buttonI()
         self.buttonO()
         self.buttonP()
-
     def button1(self):
         self.parent.button1 = QPushButton('Click me', self.parent.widget)
         self.parent.button1.resize(0, 0)
@@ -41,9 +46,8 @@ class Hotkeys():
         self.parent.button1.setShortcut(QKeySequence("ctrl+1"))
 
     def hotkey1(self):
-        if 0 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(0), self.parent.search_result.get_reading_number(0)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(0),
+        if 0<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(0),self.parent.search_result.get_reading_number(0)):
+            self.do_stuff(self.parent.search_result.get_expression_number(0),
                                              self.parent.search_result.get_reading_number(0),
                                              self.parent.search_result.get_meaning_number(0))
 
@@ -54,9 +58,8 @@ class Hotkeys():
         self.parent.button2.setShortcut(QKeySequence("ctrl+2"))
 
     def hotkey2(self):
-        if 1 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(1), self.parent.search_result.get_reading_number(1)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(1),
+        if 1<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(1),self.parent.search_result.get_reading_number(1)):
+            self.do_stuff(self.parent.search_result.get_expression_number(1),
                                              self.parent.search_result.get_reading_number(1),
                                              self.parent.search_result.get_meaning_number(1))
 
@@ -67,9 +70,8 @@ class Hotkeys():
         self.parent.button3.setShortcut(QKeySequence("ctrl+3"))
 
     def hotkey3(self):
-        if 2 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(2), self.parent.search_result.get_reading_number(2)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(2),
+        if 2<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(2),self.parent.search_result.get_reading_number(2)):
+            self.do_stuff(self.parent.search_result.get_expression_number(2),
                                              self.parent.search_result.get_reading_number(2),
                                              self.parent.search_result.get_meaning_number(2))
 
@@ -80,9 +82,8 @@ class Hotkeys():
         self.parent.button4.setShortcut(QKeySequence("ctrl+4"))
 
     def hotkey4(self):
-        if 3 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(3), self.parent.search_result.get_reading_number(3)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(3),
+        if 3<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(3),self.parent.search_result.get_reading_number(3)):
+            self.do_stuff(self.parent.search_result.get_expression_number(3),
                                              self.parent.search_result.get_reading_number(3),
                                              self.parent.search_result.get_meaning_number(3))
 
@@ -93,9 +94,8 @@ class Hotkeys():
         self.parent.button5.setShortcut(QKeySequence("ctrl+5"))
 
     def hotkey5(self):
-        if 4 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(4), self.parent.search_result.get_reading_number(4)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(4),
+        if 4<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(4),self.parent.search_result.get_reading_number(4)):
+            self.do_stuff(self.parent.search_result.get_expression_number(4),
                                              self.parent.search_result.get_reading_number(4),
                                              self.parent.search_result.get_meaning_number(4))
 
@@ -106,9 +106,8 @@ class Hotkeys():
         self.parent.button6.setShortcut(QKeySequence("ctrl+6"))
 
     def hotkey6(self):
-        if 5 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(5), self.parent.search_result.get_reading_number(5)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(5),
+        if 5<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(5),self.parent.search_result.get_reading_number(5)):
+            self.do_stuff(self.parent.search_result.get_expression_number(5),
                                              self.parent.search_result.get_reading_number(5),
                                              self.parent.search_result.get_meaning_number(5))
 
@@ -119,9 +118,8 @@ class Hotkeys():
         self.parent.button7.setShortcut(QKeySequence("ctrl+7"))
 
     def hotkey7(self):
-        if 6 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(6), self.parent.search_result.get_reading_number(6)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(6),
+        if 6<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(6),self.parent.search_result.get_reading_number(6)):
+            self.do_stuff(self.parent.search_result.get_expression_number(6),
                                              self.parent.search_result.get_reading_number(6),
                                              self.parent.search_result.get_meaning_number(6))
 
@@ -132,9 +130,8 @@ class Hotkeys():
         self.parent.button8.setShortcut(QKeySequence("ctrl+8"))
 
     def hotkey8(self):
-        if 7 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(7), self.parent.search_result.get_reading_number(7)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(7),
+        if 7<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(7),self.parent.search_result.get_reading_number(7)):
+            self.do_stuff(self.parent.search_result.get_expression_number(7),
                                              self.parent.search_result.get_reading_number(7),
                                              self.parent.search_result.get_meaning_number(7))
 
@@ -145,9 +142,8 @@ class Hotkeys():
         self.parent.button9.setShortcut(QKeySequence("ctrl+9"))
 
     def hotkey9(self):
-        if 8 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(8), self.parent.search_result.get_reading_number(8)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(8),
+        if 8<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(8),self.parent.search_result.get_reading_number(8)):
+            self.do_stuff(self.parent.search_result.get_expression_number(8),
                                              self.parent.search_result.get_reading_number(8),
                                              self.parent.search_result.get_meaning_number(8))
 
@@ -158,9 +154,8 @@ class Hotkeys():
         self.parent.button0.setShortcut(QKeySequence("ctrl+0"))
 
     def hotkey0(self):
-        if 9 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(9), self.parent.search_result.get_reading_number(9)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(9),
+        if 9<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(9),self.parent.search_result.get_reading_number(9)):
+            self.do_stuff(self.parent.search_result.get_expression_number(9),
                                              self.parent.search_result.get_reading_number(9),
                                              self.parent.search_result.get_meaning_number(9))
 
@@ -171,9 +166,8 @@ class Hotkeys():
         self.parent.buttonQ.setShortcut(QKeySequence("ctrl+Q"))
 
     def hotkeyQ(self):
-        if 10 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(10), self.parent.search_result.get_reading_number(10)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(10),
+        if 10<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(10),self.parent.search_result.get_reading_number(10)):
+            self.do_stuff(self.parent.search_result.get_expression_number(10),
                                              self.parent.search_result.get_reading_number(10),
                                              self.parent.search_result.get_meaning_number(10))
 
@@ -184,9 +178,8 @@ class Hotkeys():
         self.parent.buttonW.setShortcut(QKeySequence("ctrl+W"))
 
     def hotkeyW(self):
-        if 11 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(11), self.parent.search_result.get_reading_number(11)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(11),
+        if 11<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(11),self.parent.search_result.get_reading_number(11)):
+            self.do_stuff(self.parent.search_result.get_expression_number(11),
                                              self.parent.search_result.get_reading_number(11),
                                              self.parent.search_result.get_meaning_number(11))
 
@@ -197,9 +190,8 @@ class Hotkeys():
         self.parent.buttonE.setShortcut(QKeySequence("ctrl+E"))
 
     def hotkeyE(self):
-        if 12 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(12), self.parent.search_result.get_reading_number(12)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(12),
+        if 12<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(12),self.parent.search_result.get_reading_number(12)):
+            self.do_stuff(self.parent.search_result.get_expression_number(12),
                                              self.parent.search_result.get_reading_number(12),
                                              self.parent.search_result.get_meaning_number(12))
 
@@ -210,9 +202,8 @@ class Hotkeys():
         self.parent.buttonR.setShortcut(QKeySequence("ctrl+R"))
 
     def hotkeyR(self):
-        if 13 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(13), self.parent.search_result.get_reading_number(13)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(13),
+        if 13<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(13),self.parent.search_result.get_reading_number(13)):
+            self.do_stuff(self.parent.search_result.get_expression_number(13),
                                              self.parent.search_result.get_reading_number(13),
                                              self.parent.search_result.get_meaning_number(13))
 
@@ -223,9 +214,8 @@ class Hotkeys():
         self.parent.buttonT.setShortcut(QKeySequence("ctrl+T"))
 
     def hotkeyT(self):
-        if 14 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(14), self.parent.search_result.get_reading_number(14)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(14),
+        if 14<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(14),self.parent.search_result.get_reading_number(14)):
+            self.do_stuff(self.parent.search_result.get_expression_number(14),
                                              self.parent.search_result.get_reading_number(14),
                                              self.parent.search_result.get_meaning_number(14))
 
@@ -236,9 +226,8 @@ class Hotkeys():
         self.parent.buttonY.setShortcut(QKeySequence("ctrl+Y"))
 
     def hotkeyY(self):
-        if 15 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(15), self.parent.search_result.get_reading_number(15)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(15),
+        if 15<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(15),self.parent.search_result.get_reading_number(15)):
+            self.do_stuff(self.parent.search_result.get_expression_number(15),
                                              self.parent.search_result.get_reading_number(15),
                                              self.parent.search_result.get_meaning_number(15))
 
@@ -249,9 +238,8 @@ class Hotkeys():
         self.parent.buttonU.setShortcut(QKeySequence("ctrl+U"))
 
     def hotkeyU(self):
-        if 16 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(16), self.parent.search_result.get_reading_number(16)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(16),
+        if 16<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(16),self.parent.search_result.get_reading_number(16)):
+            self.do_stuff(self.parent.search_result.get_expression_number(16),
                                              self.parent.search_result.get_reading_number(16),
                                              self.parent.search_result.get_meaning_number(16))
 
@@ -262,9 +250,8 @@ class Hotkeys():
         self.parent.buttonI.setShortcut(QKeySequence("ctrl+I"))
 
     def hotkeyI(self):
-        if 17 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(17), self.parent.search_result.get_reading_number(17)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(17),
+        if 17<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(17),self.parent.search_result.get_reading_number(17)):
+            self.do_stuff(self.parent.search_result.get_expression_number(17),
                                              self.parent.search_result.get_reading_number(17),
                                              self.parent.search_result.get_meaning_number(17))
 
@@ -275,9 +262,8 @@ class Hotkeys():
         self.parent.buttonO.setShortcut(QKeySequence("ctrl+O"))
 
     def hotkeyO(self):
-        if 18 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(18), self.parent.search_result.get_reading_number(18)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(18),
+        if 18<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(18),self.parent.search_result.get_reading_number(18)):
+            self.do_stuff(self.parent.search_result.get_expression_number(18),
                                              self.parent.search_result.get_reading_number(18),
                                              self.parent.search_result.get_meaning_number(18))
 
@@ -288,8 +274,10 @@ class Hotkeys():
         self.parent.buttonP.setShortcut(QKeySequence("ctrl+P"))
 
     def hotkeyP(self):
-        if 19 < self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(
-                self.parent.search_result.get_expression_number(19), self.parent.search_result.get_reading_number(19)):
-            anki_api_interface.add_word_card(self.parent.search_result.get_expression_number(19),
+        if 19<self.parent.search_result.get_result_count() and not anki_api_interface.is_card_in_deck(self.parent.search_result.get_expression_number(19),self.parent.search_result.get_reading_number(19)):
+            self.do_stuff(self.parent.search_result.get_expression_number(19),
                                              self.parent.search_result.get_reading_number(19),
                                              self.parent.search_result.get_meaning_number(19))
+
+
+

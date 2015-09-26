@@ -104,7 +104,7 @@ class User_Interface():
         self.column2.move( 25+self.column12_width(),0)
         self.column3.resize(1200-self.column12_width()-self.column12_width(), new_height)
         self.column3.move(25+(self.column12_width()*2), 0)
-        self.numbercolumn.resize(25, new_height)
+        self.numbercolumn.resize(50, new_height)
         self.inner_box.resize(990, new_height + 50)
 
     def get_column3_height(self):

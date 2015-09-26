@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 # python 2.7
-import os, sys
-lib_path = os.path.abspath(os.path.join('C:\Python27\Lib'))
-sys.path.append(lib_path)
+import os
+import sys
 from bs4 import BeautifulSoup
 import urllib2
+from platform import system
+
+if system() == 'windows':
+    lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
+    sys.path.append(lib_path)
 
 class Jp_to_eng_word_search_handler:
-
-
 
     def __init__(self):
 

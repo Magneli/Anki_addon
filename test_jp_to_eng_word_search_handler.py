@@ -69,10 +69,3 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'あ', search_result_object.get_reading_number(2))
         self.assertEqual(u'I; me',
                          search_result_object.get_meaning_number(2))
-def make_newlines(number):
-    result = "a"
-    for i in range(0, number-1):
-        result += "a\na"
-    return result
-
-print(make_newlines(2))

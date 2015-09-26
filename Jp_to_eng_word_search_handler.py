@@ -2,13 +2,14 @@
 # python 2.7
 import os
 import sys
-from bs4 import BeautifulSoup
-import urllib2
 from platform import system
 
-if system() == 'windows':
+if system() == 'windows': # Because windows users cant find bs4 in standard directories?
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
+
+import urllib2
+from bs4 import BeautifulSoup
 
 class Jp_to_eng_word_search_handler:
 

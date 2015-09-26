@@ -10,8 +10,8 @@ if system() == 'windows':
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
 
-class Jp_to_eng_word_search_handler:
 
+class Jp_to_eng_word_search_handler:
     def __init__(self):
 
         self.MAX_RESULTS = 20

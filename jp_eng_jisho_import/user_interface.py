@@ -175,8 +175,3 @@ class User_Interface():
 
     def add_hotkeys(self):
         self.hk = Hotkeys(self)
-
-
-action = QAction("JP-ENG Dictionary", mw)
-mw.connect(action, SIGNAL("triggered()"), testFunction)
-mw.form.menuTools.addAction(action)

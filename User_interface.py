@@ -7,9 +7,10 @@ from aqt.utils import showInfo, getText
 # import all of the Qt GUI library
 from aqt.qt import *
 from anki import Collection
-import sys
+
 import anki_api_interface
 
+from Hotkeys import Hotkeys
 from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
 
 
@@ -19,97 +20,152 @@ def testFunction():
 
 class User_Interface():
     def __init__(self):
+        self.search_result = None
         mw.myWidget = self.widget = QWidget()
-        self.add_textbox()
-        self.add_insidebox()
+        self.widget.resize(1000, 700)
+        self.add_input_textbox()
+        self.add_inner_box()
         self.add_scroll_area()
-
-        teststring = "asdasdasdasdasdasd"
-        # self.listWidget1.resize(teststring.__len__() * 8, 2000)
-        # item = QListWidgetItem(teststring)
-        # self.listWidget1.addItem(item)
-
-        self.scrollarea.setWidget(self.insidebox)
-
+        self.add_main_buttons()
+        self.add_hotkeys()
         self.widget.show()
 
-    def add_insidebox(self):
-        self.insidebox = QWidget()
-        self.insidebox.resize(900, 2300)
+    def add_inner_box(self):
+        self.inner_box = QWidget()
+        self.inner_box.resize(1000, 2300)
 
-        self.listWidget1 = QListWidget(self.insidebox)
-        self.listWidget1.move(0, 0)
-        self.listWidget1.resize(300, 2000)
+        self.numbercolumn = QListWidget(self.inner_box)
+        self.numbercolumn.move(0, 0)
+        self.numbercolumn.resize(25, 2000)
 
-        self.listWidget2 = QListWidget(self.insidebox)
-        self.listWidget2.move(320, 0)
-        self.listWidget2.resize(300, 2000)
+        self.column1 = QListWidget(self.inner_box)
+        self.column1.move(28, 0)
+        self.column1.resize(300, 2000)
 
-        self.add_main_buttons(self.listWidget2)
-        self.listWidget3 = QListWidget(self.insidebox)
-        self.listWidget3.move(640, 0)
-        self.listWidget3.resize(300, 2000)
+        self.column2 = QListWidget(self.inner_box)
+        self.column2.move(348, 0)
+        self.column2.resize(300, 2000)
+
+        self.column3 = QListWidget(self.inner_box)
+        self.column3.move(668, 0)
+        self.column3.resize(300, 2000)
 
     def add_scroll_area(self):
         mw.scrollarea = self.scrollarea = QScrollArea(self.widget)
         self.scrollarea.move(0, 50)
-        self.scrollarea.resize(1000, 500)
+        self.scrollarea.resize(1000, 650)
+        self.scrollarea.setWidget(self.inner_box)
 
-    def add_textbox(self):
-        self.widget.resize(1000, 700)
+    def add_input_textbox(self):
+
         mw.textbox = self.textbox = QLineEdit(self.widget)
+        self.textbox.move(300, 0)
         self.textbox.resize(400, 30)
 
-    def add_main_buttons(self, listWidget2):
-        searcher = Jp_to_eng_word_search_handler()
+    def add_main_buttons(self):
+        self.searcher = Jp_to_eng_word_search_handler()
 
-        self.button = QPushButton('Click me', self.widget)
-        self.button.resize(0, 0)
-        self.button2 = QPushButton('Click me', self.widget)
-        self.button2.resize(0, 0)
+        self.search_button = QPushButton('Click me', self.widget)
+        self.search_button.resize(0, 0)
+        self.search_button.clicked.connect(self.on_click)
+        self.search_button.setShortcut(QKeySequence("return"))
 
-        def nothing():
-            pass
+    def on_click(self):
 
-        def on_click():
-            result = searcher.get_search_result(self.textbox.text())
-            self.textbox.setText("")
-            listWidget2.clear()
+        self.search_result = self.searcher.get_search_result(self.textbox.text())
+        self.textbox.setText("")
+        self.column1.clear()
+        self.column2.clear()
+        self.column3.clear()
+        self.numbercolumn.clear()
+        self.resize_columns()
+        for i in range(0, self.search_result.get_result_count()):
+            self.add_to_third_column(i, self.search_result)
+            self.add_to_number_column(i, self.search_result)
+            self.add_to_first_column(i, self.search_result)
+            self.add_to_second_column(i, self.search_result)
 
-            # showInfo(result.get_expression_number(0))
-            # listWidget2.resize(1, 1)
-            self.listWidget1.clear()
-            self.listWidget2.clear()
-            self.listWidget3.clear()
-            for i in range(0, result.get_result_count()):
-                item = QListWidgetItem(str(i+1)+": "+ result.get_expression_number(i)+"\n")
-                self.listWidget1.addItem(item)
+    def resize_columns(self):
+        column_height = self.get_column3_height()
+        self.resize_column_heights(column_height)
 
-                item = QListWidgetItem(result.get_reading_number(i)+"\n")
-                self.listWidget2.addItem(item)
+    def column12_width(self):
+        longest = 150
+        for i in range(0, self.search_result.get_result_count()):
+            if self.search_result.get_reading_number(i).__len__() * 18+20> longest:
+                longest = self.search_result.get_reading_number(i).__len__()* 18+20
+            if self.search_result.get_expression_number(i).__len__()* 18+20 > longest:
+                longest = self.search_result.get_expression_number(i).__len__()* 18+20
+        return longest
 
-                item = QListWidgetItem(result.get_meaning_number(i)+"\n")
-                self.listWidget3.addItem(item)
+    def resize_column_heights(self, new_height):
+        self.column1.resize(self.column12_width(), new_height)
+        self.column2.resize(self.column12_width(), new_height)
+        self.column2.move( 25+self.column12_width(),0)
+        self.column3.resize(1200-self.column12_width()-self.column12_width(), new_height)
+        self.column3.move(25+(self.column12_width()*2), 0)
+        self.numbercolumn.resize(25, new_height)
+        self.inner_box.resize(990, new_height + 50)
 
-        self.button.clicked.connect(on_click)
-        self.button2.clicked.connect(nothing)
-        self.button2.setShortcut(QKeySequence("tab"))
-        self.button.setShortcut(QKeySequence("return"))
+    def get_column3_height(self):
+        total_lines = 0
+        for i in range(0, self.search_result.get_result_count()):
+            total_lines += self.count_lines(self.search_result.get_meaning_number(i))
+        return total_lines * 13 + 40 + (self.search_result.get_result_count() * 30)
 
-    def table(self, search_result):
-        mw.table = table = QTableView(mw.myWidget)
-        mw.tableitem = tableItem = QListView()
+    def add_to_third_column(self, i, result):
+        self.add_string_to_list(self.column3, result.get_meaning_number(i), 9)
 
-        # initiate table
-        table.setWindowTitle("QTableWidget Example @pythonspot.com")
-        table.move(0, 50)
-        table.resize(400, 250)
+        column3_line_count = self.count_lines(result.get_meaning_number(i))
 
-        table.setShowGrid(False)
+        if column3_line_count == 1:
+            self.add_string_to_list(self.column3, "\n", 9)
+        else:
+            self.add_string_to_list(self.column3, "", 9)
 
+        if column3_line_count < 3:
+            self.lines = self.make_newlines(0)
+        else:
+            self.lines = self.make_newlines(column3_line_count - 1)
 
-        # table.hide()
-        # table.setTopMargin(0)
+    def add_to_number_column(self, i, result):
+        shortcut_list = (
+            "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P")
+
+        self.add_string_to_list(self.numbercolumn, shortcut_list[i], 16)
+        self.add_string_to_list(self.numbercolumn, self.lines, 9)
+
+    def add_to_first_column(self, i, result):
+
+        self.add_string_to_list(self.column1, result.get_expression_number(i), 16)
+        self.add_string_to_list(self.column1, self.lines, 9)
+
+    def add_to_second_column(self, i, result):
+        self.add_string_to_list(self.column2, result.get_reading_number(i), 16)
+        self.add_string_to_list(self.column2, self.lines, 9)
+
+    def add_string_to_list(self, itemlist, string, fontsize):
+        item = QListWidgetItem(string)
+        font = QFont()
+        font.setPointSize(fontsize)
+        item.setFont(font)
+        itemlist.addItem(item)
+
+    def make_newlines(self, number):
+        result = ""
+        for i in range(0, number - 1):
+            result += "\n"
+        return result
+
+    def count_lines(self, string):
+        counter = 1
+        for char in string:
+            if char == '\n':
+                counter += 1
+        return counter
+
+    def add_hotkeys(self):
+        self.hk = Hotkeys(self)
 
 
 action = QAction("test", mw)

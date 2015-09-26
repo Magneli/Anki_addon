@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # python 2.7
-class Jp_to_eng_word_search_handler:
-    import os, sys
-    lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
-    sys.path.append(lib_path)
+import os
+import sys
+from bs4 import BeautifulSoup
+import urllib2
 
-    from bs4 import BeautifulSoup
-    import urllib2
+class Jp_to_eng_word_search_handler:
+
     def __init__(self):
 
         self.MAX_RESULTS = 20
@@ -32,13 +32,13 @@ class Jp_to_eng_word_search_handler:
 
     def get_data_from_internet(self):
         try:
-            self.search_result_as_html = self.urllib2.urlopen(self.searchURL)
+            self.search_result_as_html = urllib2.urlopen(self.searchURL)
             return True
-        except self.urllib2.URLError:
+        except urllib2.URLError:
             return False
 
     def organize_data_into_soup(self):
-        soup = self.BeautifulSoup(self.search_result_as_html, "html.parser")
+        soup = BeautifulSoup(self.search_result_as_html, "html.parser")
         self.organized_results = soup.find_all('td')
 
     def get_result_count(self):

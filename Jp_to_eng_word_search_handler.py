@@ -4,7 +4,7 @@ import os
 import sys
 from platform import system
 
-if system() == 'windows': # Because windows users cant find bs4 in standard directories?
+if system().lower() == 'windows': # Because windows users cant find bs4 in standard directories?
     lib_path = os.path.abspath(os.path.join('C:\Python27\Lib\bs4', 'C:\Python27\Lib', '..', 'lib'))
     sys.path.append(lib_path)
 

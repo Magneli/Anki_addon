@@ -26,9 +26,9 @@ class User_Interface():
     def __init__(self):
         self.search_result = None
         self.small_font = 9
-        self.big_font = 17
+        self.big_font = 16
         mw.myWidget = self.widget = QWidget()
-        self.widget.resize(1000, 700)
+        self.widget.resize(1020, 700)
         self.add_input_textbox()
         self.add_inner_box()
         self.add_scroll_area()
@@ -59,7 +59,7 @@ class User_Interface():
     def add_scroll_area(self):
         mw.scrollarea = self.scrollarea = QScrollArea(self.widget)
         self.scrollarea.move(0, 50)
-        self.scrollarea.resize(1000, 650)
+        self.scrollarea.resize(1020, 650)
         self.scrollarea.setWidget(self.inner_box)
 
     def add_input_textbox(self):
@@ -100,10 +100,10 @@ class User_Interface():
     def column12_width(self):
         width_in_pixels = 150
         for i in range(0, self.search_result.get_result_count()):
-            if self.search_result.get_reading_number(i).__len__() * 18 + 20 > width_in_pixels:
-                width_in_pixels = self.search_result.get_reading_number(i).__len__() * 18 + 20
-            if self.search_result.get_expression_number(i).__len__() * 18 + 20 > width_in_pixels:
-                width_in_pixels = self.search_result.get_expression_number(i).__len__() * 18 + 20
+            if self.search_result.get_reading_number(i).__len__() * 22 > width_in_pixels:
+                width_in_pixels = self.search_result.get_reading_number(i).__len__() * 22
+            if self.search_result.get_expression_number(i).__len__() * 22 > width_in_pixels:
+                width_in_pixels = self.search_result.get_expression_number(i).__len__() * 22
         return width_in_pixels
 
     def move_columns(self):
@@ -115,7 +115,8 @@ class User_Interface():
         self.column2.resize(self.column12_width(), new_height)
         self.column3.resize(1200 - self.column12_width() - self.column12_width(), new_height)
         self.numbercolumn.resize(50, new_height)
-        self.inner_box.resize(990, new_height + 50)
+
+        self.inner_box.resize(1000, new_height + 50)
 
     def get_column3_height(self):
         total_lines = 0
@@ -162,13 +163,13 @@ class User_Interface():
     def add_string_to_list(self, itemlist, string, fontsize):
         item = QListWidgetItem(string)
         font = QFont()
-        font.setFamily("Lucida")
+        #font.setFamily("Lucida")
         font.setPointSize(fontsize)
         item.setFont(font)
         itemlist.addItem(item)
 
     def make_newlines(self, number):
-        result = ""
+        result = " "
         for i in range(0, number - 1):
             result += "\n"
         return result

@@ -71,10 +71,10 @@ class User_Interface():
     def add_main_buttons(self):
 
         self.searcher = Jp_to_eng_word_search_handler()
-        self.search_button = QPushButton('Click me', self.widget)
-        self.search_button.resize(0, 0)
-        self.search_button.clicked.connect(self.on_search)
-        self.search_button.setShortcut(QKeySequence("return"))
+        search_button = QPushButton('Click me', self.widget)
+        search_button.resize(0, 0)
+        search_button.clicked.connect(self.on_search)
+        search_button.setShortcut(QKeySequence("return"))
 
     def on_search(self):
 

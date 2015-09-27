@@ -163,7 +163,7 @@ class User_Interface():
     def add_string_to_list(self, itemlist, string, fontsize):
         item = QListWidgetItem(string)
         font = QFont()
-        #font.setFamily("Lucida")
+        # font.setFamily("Lucida")
         font.setPointSize(fontsize)
         item.setFont(font)
         itemlist.addItem(item)

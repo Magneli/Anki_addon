@@ -24,7 +24,7 @@ def find_cards(search_term):
     return mw.col.findCards(search_term)
 
 
-def is_card_in_deck(expression, reading):
+def is_card_in_collection(expression, reading):
     ids = find_cards(expression)
     for id in ids:
         card = get_card(id)

@@ -25,8 +25,8 @@ def testFunction():
 class User_Interface():
     def __init__(self):
         self.search_result = None
-        self.little_font = 8
-        self.big_font = 19
+        self.small_font = 9
+        self.big_font = 17
         mw.myWidget = self.widget = QWidget()
         self.widget.resize(1000, 700)
         self.add_input_textbox()
@@ -124,7 +124,7 @@ class User_Interface():
         return total_lines * 13 + 40 + (self.search_result.get_result_count() * 30)
 
     def add_to_third_column(self, i, result):
-        self.add_string_to_list(self.column3, result.get_meaning_number(i), self.little_font)
+        self.add_string_to_list(self.column3, result.get_meaning_number(i), self.small_font)
 
         self.column3_line_count = self.count_lines(result.get_meaning_number(i))
 
@@ -133,9 +133,9 @@ class User_Interface():
 
     def add_padding_column3(self):
         if self.column3_line_count == 1:
-            self.add_string_to_list(self.column3, "\n", self.little_font)
+            self.add_string_to_list(self.column3, "\n", self.small_font)
         else:
-            self.add_string_to_list(self.column3, "", self.little_font)
+            self.add_string_to_list(self.column3, "", self.small_font)
 
     def add_padding_other_columns(self):
         if self.column3_line_count < 3:
@@ -148,24 +148,21 @@ class User_Interface():
             "1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P")
 
         self.add_string_to_list(self.numbercolumn, shortcut_list[i], self.big_font)
-        self.add_string_to_list(self.numbercolumn, self.lines_off_padding, self.little_font)
+        self.add_string_to_list(self.numbercolumn, self.lines_off_padding, self.small_font)
 
     def add_to_first_column(self, i, result):
 
         self.add_string_to_list(self.column1, result.get_expression_number(i), self.big_font)
-        self.add_string_to_list(self.column1, self.lines_off_padding, self.little_font)
+        self.add_string_to_list(self.column1, self.lines_off_padding, self.small_font)
 
     def add_to_second_column(self, i, result):
         self.add_string_to_list(self.column2, result.get_reading_number(i), self.big_font)
-        self.add_string_to_list(self.column2, self.lines_off_padding, self.little_font)
+        self.add_string_to_list(self.column2, self.lines_off_padding, self.small_font)
 
     def add_string_to_list(self, itemlist, string, fontsize):
         item = QListWidgetItem(string)
         font = QFont()
-        if system().lower() == 'windows':
-            font.setFamily("Arial")
-        else:
-            font.setFamilty("Helvetica")
+        font.setFamily("Lucida")
         font.setPointSize(fontsize)
         item.setFont(font)
         itemlist.addItem(item)

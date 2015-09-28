@@ -122,7 +122,7 @@ class User_Interface():
         total_lines = 0
         for i in range(0, self.search_result.get_result_count()):
             total_lines += self.count_lines(self.search_result.get_meaning_number(i))
-        return total_lines * 13 + 40 + (self.search_result.get_result_count() * 30)
+        return total_lines * 15 + 40 + (self.search_result.get_result_count() * 32)
 
     def add_to_third_column(self, i, result):
         self.add_string_to_list(self.column3, result.get_meaning_number(i), self.small_font)

@@ -9,9 +9,11 @@ import anki_api_interface
 class Hotkeys():
     def do_stuff(self, exp, reading, meaning):
         if exp != "":
-            anki_api_interface.add_word_card(exp, reading, meaning)
+            if not anki_api_interface.is_card_in_collection(exp, reading):
+                anki_api_interface.add_word_card(exp, reading, meaning)
         else:
-            anki_api_interface.add_word_card(reading, reading, meaning)
+            if not anki_api_interface.is_card_in_collection(reading, reading):
+                anki_api_interface.add_word_card(reading, reading, meaning)
 
     def __init__(self, parent):
         self.parent = parent

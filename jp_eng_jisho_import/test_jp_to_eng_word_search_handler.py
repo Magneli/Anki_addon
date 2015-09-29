@@ -10,6 +10,19 @@ import datetime
 
 
 class TestJp_to_eng_word_search_handler(TestCase):
+    def test_unfinished(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.get_search_result("tabe")
+        self.assertEqual(20, search_result_object.result_count)
+        self.assertEqual(u'多弁', search_result_object.get_expression_number(0))
+        self.assertEqual(u'たべん', search_result_object.get_reading_number(0))
+        self.maxDiff = None
+        self.assertEqual(
+            u'talkativeness; verbosity',
+            search_result_object.get_meaning_number(0))
+
+
+
     def test_no_result(self):
         searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.get_search_result("nonsensicalgibberish")
@@ -69,3 +82,55 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'あ', search_result_object.get_reading_number(2))
         self.assertEqual(u'I; me',
                          search_result_object.get_meaning_number(2))
+
+    def test_wildcard_reading(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.get_search_result("*けたまわる")
+        self.assertEqual(2, search_result_object.result_count)
+        self.assertEqual(u'承る', search_result_object.get_expression_number(0))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(0))
+
+        self.assertEqual(u'受け賜る', search_result_object.get_expression_number(1))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(1))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(1))
+
+    def test_surrounding_wildcards(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.get_search_result("*けたまわ*")
+        self.assertEqual(2, search_result_object.result_count)
+        self.assertEqual(u'承る', search_result_object.get_expression_number(0))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(0))
+
+        self.assertEqual(u'受け賜る', search_result_object.get_expression_number(1))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(1))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(1))
+
+    def test_wildcard_expression(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.get_search_result("*け賜る")
+        self.assertEqual(1, search_result_object.result_count)
+        self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(0))
+
+    def test_surrounding_expression(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.get_search_result("*け賜*")
+        self.assertEqual(1, search_result_object.result_count)
+        self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
+        self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(0))

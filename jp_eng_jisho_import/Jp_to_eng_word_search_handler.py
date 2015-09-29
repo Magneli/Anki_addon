@@ -67,23 +67,70 @@ class Jp_to_eng_word_search_handler:
 
     def get_expression_from_soup(self, number):
         try:
-            return self.organized_results[number * 5].span.span.string + \
-                   self.organized_results[number * 5].span.contents[1].rstrip()
-        except IndexError:
-            return self.organized_results[number * 5].span.string
+
+            return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
+                number * 5].span.span.string.strip() + self.organized_results[number * 5].span.contents[2].strip()
         except AttributeError:
-            return self.organized_results[number * 5].span.string.rstrip()
+            try:
+
+                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
+                    number * 5].span.span.string.strip()
+            except AttributeError:
+                try:
+
+                    return self.organized_results[number * 5].span.span.string.lstrip() + \
+                           self.organized_results[number * 5].span.contents[1].strip()
+                except AttributeError:
+
+                    return self.organized_results[number * 5].span.string.strip()
+        except IndexError:
+
+            try:
+
+                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
+                    number * 5].span.span.string.strip()
+            except  IndexError:
+                try:
+                    return self.organized_results[number * 5].span.span.string.lstrip() + \
+                           self.organized_results[number * 5].span.contents[1].strip()
+                except  IndexError:
+
+                    return self.organized_results[number * 5].span.string.strip()
+        except TypeError:
+
+            try:
+                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
+                    number * 5].span.span.string.strip()
+            except TypeError:
+
+                try:
+
+                    return self.organized_results[number * 5].span.span.string.lstrip() + \
+                           self.organized_results[number * 5].span.contents[1].strip()
+                except TypeError:
+
+                    return self.organized_results[number * 5].span.string.strip()
 
     def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:
-
             try:
-                return self.organized_results[(number * 5) + 1].span.string + \
-                       self.organized_results[(number * 5) + 1].contents[1].rstrip()
+                return self.organized_results[(number * 5) + 1].contents[0].strip() + self.organized_results[
+                    (number * 5) + 1].span.string + \
+                       self.organized_results[(number * 5) + 1].contents[2].rstrip()
             except TypeError:
-                return self.organized_results[(number * 5) + 1].span.string
+                try:
+                    return self.organized_results[(number * 5) + 1].contents[0].strip() + self.organized_results[
+                        (number * 5) + 1].span.string
+                except TypeError:
+                    try:
+                        return self.organized_results[
+                                   (number * 5) + 1].span.string + \
+                               self.organized_results[(number * 5) + 1].contents[1].rstrip()
+                    except TypeError:
+
+                        return self.organized_results[(number * 5) + 1].span.string
         else:
-            return self.organized_results[(number * 5) + 1].string.rstrip().rstrip()
+            return self.organized_results[(number * 5) + 1].string.strip()
 
     def get_meaning_from_soup(self, number):
         if self.organized_results[(number * 5) + 2].string is not None:
@@ -128,7 +175,7 @@ class Search_result:
         return self.result_count
 
 
-read = "a"
+read = "欠*"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))

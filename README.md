@@ -3,10 +3,12 @@
 # Description
 
    * Plugin for anki that implements a dictionary lookup that can import results as cards into anki.
+   * Primarily made for my own needs, no intentions to actively distribute.
 
 # Status
 
    * Fully functional on my own system, problematic to distribute.
+   * UI is messy on unix systems.
 
 # Todo
 

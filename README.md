@@ -2,12 +2,11 @@
 
 # Description
 
-    Plugin for anki that implements a dictionary lookup that
-    can import results as cards into anki.
+   * Plugin for anki that implements a dictionary lookup that can import results as cards into anki.
 
 # Status
 
-    Fully functional on my own system, problematic to distribute.
+   * Fully functional on my own system, problematic to distribute.
 
 # Todo
 

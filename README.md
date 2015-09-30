@@ -1,4 +1,17 @@
-# Anki plugin for using jisho.org
+# Anki plugin using jisho.org
+
+# Description
+
+    Plugin for anki that implements a dictionary lookup that can import results as cards into anki.
+
+# Status
+
+    Fully functional on my own system, hastle to setup and get working.
+
+# Todo
+
+   * Rework the way the plugin interacts with the internal structure, allowing a default setting that is plug and play, and options for customisation.
+   * Rework the UI so that it displays properly on unix systems.
 
 ## Resources
 

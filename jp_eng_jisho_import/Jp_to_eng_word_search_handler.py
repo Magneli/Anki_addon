@@ -70,46 +70,21 @@ class Jp_to_eng_word_search_handler:
 
             return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
                 number * 5].span.span.string.strip() + self.organized_results[number * 5].span.contents[2].strip()
-        except AttributeError:
+        except :
             try:
 
                 return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
                     number * 5].span.span.string.strip()
-            except AttributeError:
+            except:
                 try:
 
                     return self.organized_results[number * 5].span.span.string.lstrip() + \
                            self.organized_results[number * 5].span.contents[1].strip()
-                except AttributeError:
+                except :
 
                     return self.organized_results[number * 5].span.string.strip()
-        except IndexError:
 
-            try:
 
-                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
-                    number * 5].span.span.string.strip()
-            except  IndexError:
-                try:
-                    return self.organized_results[number * 5].span.span.string.lstrip() + \
-                           self.organized_results[number * 5].span.contents[1].strip()
-                except  IndexError:
-
-                    return self.organized_results[number * 5].span.string.strip()
-        except TypeError:
-
-            try:
-                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
-                    number * 5].span.span.string.strip()
-            except TypeError:
-
-                try:
-
-                    return self.organized_results[number * 5].span.span.string.lstrip() + \
-                           self.organized_results[number * 5].span.contents[1].strip()
-                except TypeError:
-
-                    return self.organized_results[number * 5].span.string.strip()
 
     def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:

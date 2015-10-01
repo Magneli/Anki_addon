@@ -56,7 +56,6 @@ def _find_sample_card_for_card_creation():
         return get_card(id)
 
 
-
 def reset_card_due_stats(card):
     card.queue = 2
     card.type = 2

@@ -7,7 +7,7 @@
 
 # Status
 
-   * Fully functional on my own system, problematic to distribute.
+   * Functional on my own system, problematic to distribute.
    * UI is messy on unix systems.
 
 # Todo

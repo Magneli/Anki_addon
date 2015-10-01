@@ -32,7 +32,7 @@ class User_Interface():
         self.add_input_textbox()
         self.add_inner_box()
         self.add_scroll_area()
-        self.add_main_buttons()
+        self.add_main_button()
         self.add_hotkeys()
         self.widget.show()
 
@@ -68,7 +68,7 @@ class User_Interface():
         self.textbox.move(300, 0)
         self.textbox.resize(400, 30)
 
-    def add_main_buttons(self):
+    def add_main_button(self):
 
         self.searcher = Jp_to_eng_word_search_handler()
         search_button = QPushButton('Click me', self.widget)

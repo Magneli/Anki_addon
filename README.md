@@ -24,7 +24,7 @@
 
 ## Extra requirements
 
-   * bs4 (BeutifulSoup 4)
+   * [bs4 (BeutifulSoup 4)](https://pypi.python.org/pypi/beautifulsoup4/4.4.0)
 
 
 ## Install instructions

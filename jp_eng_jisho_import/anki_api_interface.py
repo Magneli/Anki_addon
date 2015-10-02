@@ -8,13 +8,12 @@ from aqt.utils import showInfo
 from aqt.qt import *
 from anki import Collection
 
-deck_name = u'Words'
-model_name = u'Default plugin template'
+# deck_name = u'Words'
+# model_name = u'Default plugin template'
 
 
-# deck_name = u'語彙'
-# model_name = u'Japonaise example_sentence'
-
+deck_name = u'語彙'
+model_name = u'Japonaise example_sentence'
 
 
 def get_deck_name(card):

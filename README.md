@@ -7,12 +7,14 @@
 
 # Status
 
-   * Functional on my own system, problematic to distribute.
-   * UI is messy on unix systems.
+   * UI pending rework, otherwise functional.
+   * Comes with a default setting for deck and template.
+   * UI might display incorerctly on unix systems.
 
 # Todo
 
    * Rework the UI so that it displays properly on unix systems.
+   * Better option to change deck and template, currently requires renaming in source code.
 
 ## Resources
 

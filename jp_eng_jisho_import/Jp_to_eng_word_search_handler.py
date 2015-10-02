@@ -6,7 +6,9 @@ import sys
 from platform import system
 
 if system().lower() == 'windows':
-    lib_path = os.path.abspath(os.path.join('C:\Python27\Lib'))
+    # lib_path = os.path.abspath(os.path.join('C:\Python27\Lib'))
+    # lib_path = os.path.abspath(os.path.join('e:\lib'))
+    lib_path = os.path.realpath(os.path.join('...'))
     sys.path.append(lib_path)
 
 from bs4 import BeautifulSoup
@@ -70,7 +72,7 @@ class Jp_to_eng_word_search_handler:
 
             return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
                 number * 5].span.span.string.strip() + self.organized_results[number * 5].span.contents[2].strip()
-        except :
+        except:
             try:
 
                 return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
@@ -80,11 +82,9 @@ class Jp_to_eng_word_search_handler:
 
                     return self.organized_results[number * 5].span.span.string.lstrip() + \
                            self.organized_results[number * 5].span.contents[1].strip()
-                except :
+                except:
 
                     return self.organized_results[number * 5].span.string.strip()
-
-
 
     def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:

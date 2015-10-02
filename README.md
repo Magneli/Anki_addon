@@ -12,7 +12,6 @@
 
 # Todo
 
-   * Rework the way the plugin interacts with ankis internal structure, allowing a default setting that is plug and play, and options for customisation.
    * Rework the UI so that it displays properly on unix systems.
 
 ## Resources

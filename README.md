@@ -9,7 +9,7 @@
 
    * UI pending rework, otherwise functional.
    * Comes with a default setting for deck and template.
-   * UI might display incorerctly on unix systems.
+   * UI might display incorrectly on unix systems.
 
 # Todo
 

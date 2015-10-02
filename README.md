@@ -36,4 +36,5 @@
 
 ### Windows
 
-
+    * Download all files and put them in the anki addon folder.
+    * Download bs4 for python 2.7 and put the bs4 folder in the anki addon folder.

@@ -32,7 +32,12 @@
 ### Debian
 
     $ apt-get install python-bs4
-    $ git clone git@github.com:magneli/Anki_dictionary_plugin_WIP.git ~/Documents/Anki/addons
+    $ git clone https://github.com/Magneli/Anki-japanese-dictionary-plugin---WIP.git ~/Documents/Anki/addons
+
+### Ubuntu
+
+    $ apt-get install python-bs4
+    $ git clone https://github.com/Magneli/Anki-japanese-dictionary-plugin---WIP.git ~/Anki/addons
 
 ### Windows
 

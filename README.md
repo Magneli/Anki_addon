@@ -24,7 +24,7 @@
 
 ## Extra requirements
 
-   * [bs4 (BeutifulSoup 4)](https://pypi.python.org/pypi/beautifulsoup4/4.4.0)
+   * [bs4 (BeutifulSoup 4)](https://pypi.python.org/pypi/beautifulsoup4/)
 
 
 ## Install instructions
@@ -36,5 +36,5 @@
 
 ### Windows
 
-    * Download all files and put them in the anki addon folder.
-    * Download bs4 for python 2.7 and put the bs4 folder in the anki addon folder.
+    * Download all files and put the contents in the anki addon folder.
+    * Download bs4 for python 2.7, unzip it and put the bs4 folder in the anki addon folder.

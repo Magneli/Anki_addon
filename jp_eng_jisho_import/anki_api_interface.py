@@ -6,13 +6,13 @@ from aqt import mw
 from aqt.utils import showInfo
 # import all of the Qt GUI library
 from aqt.qt import *
-from anki import Collection
+
 
 # deck_name = u'Words'
 # model_name = u'Default plugin template'
 
 
-deck_name = u'語彙'
+deck_name = u'space'
 model_name = u'Japanese-eng words'
 
 

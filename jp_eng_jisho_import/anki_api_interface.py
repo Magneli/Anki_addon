@@ -13,7 +13,7 @@ from anki import Collection
 
 
 deck_name = u'語彙'
-model_name = u'Japonaise example_sentence'
+model_name = u'Japanese-eng words'
 
 
 def get_deck_name(card):

@@ -98,7 +98,7 @@ class User_Interface():
         self.move_columns()
 
     def column12_width(self):
-        width_in_pixels = 150
+        width_in_pixels = 210
         for i in range(0, self.search_result.get_result_count()):
             if self.search_result.get_reading_number(i).__len__() * 22 > width_in_pixels:
                 width_in_pixels = self.search_result.get_reading_number(i).__len__() * 22

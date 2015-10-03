@@ -53,11 +53,39 @@ def add_word_card(expression, reading, meaning):
     deck = find_deck()
     model = find_model(deck)
     set_deck_id(model, deck['id'])
-    select_model(model)
+    select_model_internally_for_note_creation(model)
     note = make_note()
     add_info_to_note(note, expression, reading, meaning)
     mw.col.addNote(note)
     note.flush()
+
+
+def find_deck():
+    deck = mw.col.decks.byName(deck_name)
+    if deck is None:
+        mw.col.decks.id(deck_name)
+        deck = mw.col.decks.byName(deck_name)
+    return deck
+
+
+def find_model(deck):
+    model = mw.col.models.byName(model_name)
+    if model is None:
+        add_model(model_name, deck['id'])
+        model = mw.col.models.byName(model_name)
+    return model
+
+
+def set_deck_id(model, did):
+    model['tmpls'][0]['did'] = did
+
+
+def select_model_internally_for_note_creation(model):
+    mw.col.models.setCurrent(model)
+
+
+def make_note():
+    return mw.col.newNote(False)
 
 
 def add_info_to_note(note, expression, reading, meaning):
@@ -69,34 +97,6 @@ def add_info_to_note(note, expression, reading, meaning):
         else:
             note[name] = value + ""
         i += 1
-
-
-def make_note():
-    return mw.col.newNote(False)
-
-
-def select_model(model):
-    mw.col.models.setCurrent(model)
-
-
-def find_deck():
-    deck = mw.col.decks.byName(deck_name)
-    if deck == None:
-        mw.col.decks.id(deck_name)
-    deck = mw.col.decks.byName(deck_name)
-    return deck
-
-
-def find_model(deck):
-    model = mw.col.models.byName(model_name)
-    if model == None:
-        add_model(model_name, deck['id'])
-    model = mw.col.models.byName(model_name)
-    return model
-
-
-def set_deck_id(model, did):
-    model['tmpls'][0]['did'] = did
 
 
 def add_model(name, id):

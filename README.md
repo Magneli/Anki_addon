@@ -4,10 +4,11 @@
 
    * Plugin for anki that implements a dictionary lookup that can import results as cards into anki.
    * Primarily made for my own needs, no intentions to actively distribute.
+   * Use ctrl+character displayed left of the search result to add card to target deck.
 
 # Status
 
-   * UI pending rework, otherwise functional.
+   * Fully functional, UI needs rework.
    * Comes with a default setting for deck and template.
    * UI might display incorrectly on unix systems.
 
@@ -40,5 +41,6 @@
 
 ### Windows
 
-    * Download all files and put the contents in the anki addon folder.
+    * Download zip file.
+    * Unzip and put the contents of the unzippped folder inside the anki addon folder.
     * Download bs4 for python 2.7, unzip it and put the bs4 folder in the anki addon folder.

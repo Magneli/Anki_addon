@@ -13,9 +13,8 @@
 
 # Todo
 
-   * Add config parser
    * Rework the UI so that it displays properly on unix systems.
-   * Better option to change deck and template, currently requires renaming in source code.
+
 
 ## Resources
 

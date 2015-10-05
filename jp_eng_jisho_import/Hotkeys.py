@@ -8,7 +8,6 @@ from aqt.utils import showInfo
 
 class Hotkeys():
     def do_stuff(self, exp, reading, meaning):
-        showInfo("yay")
         if exp != "":
             if not anki_api_interface.is_card_in_collection(exp, reading):
                 anki_api_interface.add_word_card(exp, reading, meaning)

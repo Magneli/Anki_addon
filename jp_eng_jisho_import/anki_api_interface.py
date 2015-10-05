@@ -12,7 +12,7 @@ from aqt.qt import *
 # model_name = u'Default plugin template'
 
 
-deck_name = u'space'
+deck_name = u'語彙'
 model_name = u'Japanese-eng words'
 
 

@@ -1,4 +1,4 @@
-# Anki plugin using jisho.org
+# Dictionary plugin for anki using jisho.org
 
 # Description
 
@@ -6,13 +6,13 @@
    * Primarily made for my own needs, no intentions to actively distribute.
    * Use ctrl+character displayed left of the search result to add card to target deck.
 
-# Status
+## Status
 
    * Fully functional, UI needs rework.
    * Comes with a default setting for deck and template.
    * UI might display incorrectly on unix systems.
 
-# Todo
+## Todo
 
    * Rework the UI so that it displays properly on unix systems.
 

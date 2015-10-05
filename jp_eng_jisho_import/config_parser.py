@@ -1,44 +1,34 @@
 # -*- coding: utf-8 -*-
 # python 2.7
-
-
 import codecs
 
 deck_name = None
-model_name = None
-
 
 def read_config():
     global deck_name
     try:
-        cfgfile = open("deck_name.ini", 'r')
+        cfgfile = codecs.open("deck_name.ini", 'r','utf-8')
         deck_name = cfgfile.read()
         cfgfile.close()
     except:
-        print "wat"
+        deck_name = u'語彙'
         pass
 
 
 def write_config():
-    cfgfile = open("deck_name.ini", 'w')
+    cfgfile = codecs.open("deck_name.ini", 'w','utf-8')
 
-    cfgfile.write("漢字")
+    cfgfile.write(deck_name)
     cfgfile.close()
 
-
-def write_default_config():
-    cfgfile = open("deck_name.ini", 'w')
-    cfgfile.close()
-
-
-# write_default_config()
 # write_config()
-read_config()
+#read_config()
 
-# deck_name = "かんじ"
+#deck_name = "かんじ"
+#write_config()
 # model_name = "asdasd"
 print deck_name
-print model_name
+
 
 
 # write_config()

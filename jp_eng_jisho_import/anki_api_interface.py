@@ -12,7 +12,7 @@ import config_parser
 # model_name = u'Default plugin template'
 
 
-deck_name = u'語彙'
+#deck_name = u'語彙'
 model_name = u'Japanese-eng words'
 
 
@@ -61,10 +61,10 @@ def add_word_card(expression, reading, meaning):
 
 
 def find_deck():
-    deck = mw.col.decks.byName(deck_name)
+    deck = mw.col.decks.byName(config_parser.deck_name)
     if deck is None:
-        mw.col.decks.id(deck_name)
-        deck = mw.col.decks.byName(deck_name)
+        mw.col.decks.id(config_parser.deck_name)
+        deck = mw.col.decks.byName(config_parser.deck_name)
     return deck
 
 

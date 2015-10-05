@@ -9,7 +9,7 @@ from aqt.qt import *
 from anki import Collection
 import os
 import sys
-
+import config_parser
 from platform import system
 
 import anki_api_interface
@@ -33,6 +33,10 @@ class User_Interface():
         self.add_inner_box()
         self.add_scroll_area()
         self.add_main_button()
+
+        self.add_deck_textbox()
+        self.add_deck_selector_button()
+
         self.add_hotkeys()
         self.widget.show()
 
@@ -68,6 +72,13 @@ class User_Interface():
         self.textbox.move(300, 0)
         self.textbox.resize(400, 30)
 
+    def add_deck_textbox(self):
+        config_parser.read_config()
+        self.deck_textbox = QLineEdit(self.widget)
+        self.deck_textbox.move(750, 0)
+        self.deck_textbox.resize(110, 30)
+        self.deck_textbox.setText(config_parser.deck_name)
+
     def add_main_button(self):
 
         self.searcher = Jp_to_eng_word_search_handler()
@@ -75,6 +86,16 @@ class User_Interface():
         search_button.resize(0, 0)
         search_button.clicked.connect(self.on_search)
         search_button.setShortcut(QKeySequence("return"))
+
+    def add_deck_selector_button(self):
+
+        deck_select_button = QPushButton('Set deck', self.widget)
+        deck_select_button.clicked.connect(self.on_deck_select)
+        deck_select_button.move(860,0)
+
+    def on_deck_select(self):
+        config_parser.deck_name = self.deck_textbox.text()
+        config_parser.write_config()
 
     def on_search(self):
 

@@ -29,15 +29,22 @@
 
 ## Install instructions
 
-### Debian
+### Linux
 
-    $ apt-get install python-bs4
+#### Debian
+
+    $ sudo apt-get install python-bs4
     $ git clone https://github.com/Magneli/Anki-japanese-dictionary-plugin---WIP.git ~/Documents/Anki/addons
 
-### Ubuntu
+#### Ubuntu
 
-    $ apt-get install python-bs4
+    $ sudo apt-get install python-bs4
     $ git clone https://github.com/Magneli/Anki-japanese-dictionary-plugin---WIP.git ~/Anki/addons
+
+#### Fedora (22)
+
+    $ sudo dnf install python-beautifulsoup4
+    $ git clone https://github.com/Magneli/Anki-japanese-dictionary-plugin---WIP.git ~/Documents/Anki/addons
 
 ### Windows
 

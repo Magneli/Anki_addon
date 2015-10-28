@@ -99,7 +99,7 @@ class User_Interface():
 
     def on_search(self):
 
-        self.search_result = self.searcher.get_search_result(self.textbox.text())
+        self.search_result = self.searcher.search(self.textbox.text())
         if self.search_result.get_result_count() > 0:
             self.textbox.setText("")
             self.column1.clear()

@@ -24,17 +24,17 @@ class Jp_to_eng_word_search_handler:
         self.search_result_as_html = None
         self.result_count = 0
 
-    def get_search_result(self, search_term):
-        self.result_object = Search_result()
+    def search(self, search_term):
+        self.word_result_object = Search_result()
         self.make_search_url(search_term)
 
         if not self.get_data_from_internet():
-            return self.result_object
+            return self.word_result_object
 
         self.organize_data_into_soup()
         self.get_result_count()
         self.store_results_from_soup()
-        return self.result_object
+        return self.word_result_object
 
     def make_search_url(self, search_term):
         self.searchURL = "http://classic.jisho.org/words?jap=" + search_term + "&eng=&dict=edict"
@@ -56,16 +56,16 @@ class Jp_to_eng_word_search_handler:
                 self.organized_results[counter * 5]
             except IndexError:
                 break
-            self.result_object.result_count = counter + 1
+            self.word_result_object.result_count = counter + 1
 
     def store_results_from_soup(self):
-        for i in range(0, self.result_object.result_count):
+        for i in range(0, self.word_result_object.result_count):
             self.save_result_in_object(i)
 
     def save_result_in_object(self, number):
-        self.result_object.add_expression(self.get_expression_from_soup(number))
-        self.result_object.add_reading(self.get_reading_from_soup(number))
-        self.result_object.add_meaning(self.get_meaning_from_soup(number))
+        self.word_result_object.add_expression(self.get_expression_from_soup(number))
+        self.word_result_object.add_reading(self.get_reading_from_soup(number))
+        self.word_result_object.add_meaning(self.get_meaning_from_soup(number))
 
     def get_expression_from_soup(self, number):
         try:
@@ -83,8 +83,12 @@ class Jp_to_eng_word_search_handler:
                     return self.organized_results[number * 5].span.span.string.lstrip() + \
                            self.organized_results[number * 5].span.contents[1].strip()
                 except:
+                    try:
+                        return self.organized_results[number * 5].span.string.strip()
+                    except:
+                        return self.organized_results[number * 5].span.span.string.strip()
 
-                    return self.organized_results[number * 5].span.string.strip()
+
 
     def get_reading_from_soup(self, number):
         if self.organized_results[(number * 5) + 1].span is not None:
@@ -150,15 +154,16 @@ class Search_result:
         return self.result_count
 
 
-read = "欠*"
+read = "街"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))
 
     ducks = Jp_to_eng_word_search_handler()
-    asd = ducks.get_search_result("asd")
-    result = ducks.get_search_result(read)
+    asd = ducks.search("asd")
+    result = ducks.search(read)
     print(result.result_count)
     for x in range(0, result.result_count):
         print(result.get_expression_number(x) + ":" + result.get_reading_number(x))
         print(result.get_meaning_number(x))
+        pass

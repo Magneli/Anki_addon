@@ -12,7 +12,7 @@ import datetime
 class TestJp_to_eng_word_search_handler(TestCase):
     def test_unfinished(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("tabe")
+        search_result_object = searcher_handler.search("tabe")
         self.assertEqual(20, search_result_object.result_count)
         self.assertEqual(u'多弁', search_result_object.get_expression_number(0))
         self.assertEqual(u'たべん', search_result_object.get_reading_number(0))
@@ -21,11 +21,9 @@ class TestJp_to_eng_word_search_handler(TestCase):
             u'talkativeness; verbosity',
             search_result_object.get_meaning_number(0))
 
-
-
     def test_no_result(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("nonsensicalgibberish")
+        search_result_object = searcher_handler.search("nonsensicalgibberish")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
         self.assertEqual([], search_result_object.reading)
@@ -33,7 +31,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_empty_search_term(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("")
+        search_result_object = searcher_handler.search("")
         self.assertEqual(0, search_result_object.result_count)
         self.assertEqual([], search_result_object.expression)
         self.assertEqual([], search_result_object.reading)
@@ -41,7 +39,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_nasty_example(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("掛ける")
+        search_result_object = searcher_handler.search("掛ける")
         self.assertEqual(1, search_result_object.result_count)
         self.assertEqual(u'掛ける', search_result_object.get_expression_number(0))
         self.assertEqual(u'かける', search_result_object.get_reading_number(0))
@@ -52,7 +50,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_simple_example(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("taberu")
+        search_result_object = searcher_handler.search("taberu")
         self.assertEqual(2, search_result_object.result_count)
         self.assertEqual(u'食べる', search_result_object.get_expression_number(0))
         self.assertEqual(u'たべる', search_result_object.get_reading_number(0))
@@ -66,7 +64,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_a(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("a")
+        search_result_object = searcher_handler.search("a")
         self.assertEqual(20, search_result_object.result_count)
         self.assertEqual(u'', search_result_object.get_expression_number(0))
         self.assertEqual(u'あ', search_result_object.get_reading_number(0))
@@ -85,7 +83,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_wildcard_reading(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("*けたまわる")
+        search_result_object = searcher_handler.search("*けたまわる")
         self.assertEqual(2, search_result_object.result_count)
         self.assertEqual(u'承る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
@@ -101,7 +99,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_surrounding_wildcards(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("*けたまわ*")
+        search_result_object = searcher_handler.search("*けたまわ*")
         self.assertEqual(2, search_result_object.result_count)
         self.assertEqual(u'承る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
@@ -117,7 +115,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_wildcard_expression(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("*け賜る")
+        search_result_object = searcher_handler.search("*け賜る")
         self.assertEqual(1, search_result_object.result_count)
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
@@ -127,10 +125,20 @@ class TestJp_to_eng_word_search_handler(TestCase):
 
     def test_surrounding_expression(self):
         searcher_handler = Jp_to_eng_word_search_handler()
-        search_result_object = searcher_handler.get_search_result("*け賜*")
+        search_result_object = searcher_handler.search("*け賜*")
         self.assertEqual(1, search_result_object.result_count)
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
         self.assertEqual(
             u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            search_result_object.get_meaning_number(0))
+
+    def test_kaku(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.search("各")
+        self.assertEqual(20, search_result_object.result_count)
+        self.assertEqual(u'各', search_result_object.get_expression_number(0))
+        self.assertEqual(u'かく', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'each; every; all',
             search_result_object.get_meaning_number(0))

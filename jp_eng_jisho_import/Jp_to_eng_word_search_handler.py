@@ -113,14 +113,21 @@ class Jp_to_eng_word_search_handler:
 
     def get_meaning_from_soup(self, number):
         if self.organized_results[(number * 5) + 2].string is not None:
+
             return self.organized_results[(number * 5) + 2].string.strip()
         else:
+
             result = ""
             try:
                 for index in range(0, 100):
                     if str(self.organized_results[(number * 5) + 2].contents[index]) == "<br/>":
-                        result += self.organized_results[(number * 5) + 2].contents[index - 1].strip()
-                        result += "\n"
+                        if self.organized_results[(number * 5) + 2].contents[index - 1].strip() !=';':
+
+                            result += self.organized_results[(number * 5) + 2].contents[index - 1].strip()
+                            result += "\n"
+                        else:
+                            result += self.organized_results[(number * 5) + 2].contents[index - 3].strip()+";"
+                            result += "\n"
             except IndexError:
                 return result.strip()
 
@@ -154,7 +161,7 @@ class Search_result:
         return self.result_count
 
 
-read = "街"
+read = "消滅"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))

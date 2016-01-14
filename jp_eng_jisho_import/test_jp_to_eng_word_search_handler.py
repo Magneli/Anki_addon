@@ -6,10 +6,11 @@ import time
 __author__ = 'Magne Limi'
 
 from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
-import datetime
+
 
 
 class TestJp_to_eng_word_search_handler(TestCase):
+
     def test_unfinished(self):
         searcher_handler = Jp_to_eng_word_search_handler()
         search_result_object = searcher_handler.search("tabe")
@@ -141,4 +142,14 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'かく', search_result_object.get_reading_number(0))
         self.assertEqual(
             u'each; every; all',
+            search_result_object.get_meaning_number(0))
+
+    def test_syoumetsu(self):
+        searcher_handler = Jp_to_eng_word_search_handler()
+        search_result_object = searcher_handler.search("消滅")
+        self.assertEqual(2, search_result_object.result_count)
+        self.assertEqual(u'消滅', search_result_object.get_expression_number(0))
+        self.assertEqual(u'しょうめつ', search_result_object.get_reading_number(0))
+        self.assertEqual(
+            u'lapse; annihilation;\nextinguishment; termination (e.g. of legal representation);\nvanishing',
             search_result_object.get_meaning_number(0))

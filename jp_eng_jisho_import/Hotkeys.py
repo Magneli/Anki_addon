@@ -2,7 +2,7 @@
 # python 2.7
 # import all of the Qt GUI library
 from aqt.qt import *
-import anki_api_interface
+from API import anki_api_interface
 from aqt.utils import showInfo
 
 

@@ -12,13 +12,13 @@ import sys
 import config_parser
 from platform import system
 
-import anki_api_interface
+import API
 
 from Hotkeys import Hotkeys
-from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
+from Search_handler import Jp_to_eng_word_search_handler
 
 
-def testFunction():
+def runOldUi():
     interface = User_Interface()
 
 
@@ -82,7 +82,7 @@ class User_Interface():
 
     def add_main_button(self):
 
-        self.searcher = Jp_to_eng_word_search_handler()
+        self.searcher = Jp_to_eng_word_search_handler.Jp_to_eng_word_search_handler()
         search_button = QPushButton('Click me', self.widget)
         search_button.resize(0, 0)
         search_button.clicked.connect(self.on_search)

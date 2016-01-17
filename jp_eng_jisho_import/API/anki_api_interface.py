@@ -6,7 +6,7 @@ from aqt import mw
 from aqt.utils import showInfo
 # import all of the Qt GUI library
 from aqt.qt import *
-import config_parser
+from .. import config_parser
 
 # deck_name = u'Words'
 # model_name = u'Default plugin template'

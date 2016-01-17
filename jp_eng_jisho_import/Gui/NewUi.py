@@ -28,5 +28,5 @@ class Interface(QWidget):
         self.setWindowTitle(u'鴨鴨')
         makeAreas(self)
         self.htmlarea.setHtml(
-            "<html> <head> </head> <body style=\"background-color:gray\"> <p style=\"width:50%;background-color:pink;font-family:Verdana; color:blue; font-size:20px\">yay </p> </body> </html>")
+            "<html> <head> </head> <body style=\"background-color:gray\"> <p>yay </p> </body> </html>")
         self.show()

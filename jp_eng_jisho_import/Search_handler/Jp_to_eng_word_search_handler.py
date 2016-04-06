@@ -66,50 +66,18 @@ class Jp_to_eng_word_search_handler:
         self.word_result_object.add_expression(self.get_expression_from_soup(number))
         self.word_result_object.add_reading(self.get_reading_from_soup(number))
         self.word_result_object.add_meaning(self.get_meaning_from_soup(number))
+        self.word_result_object.add_note(self.get_note_from_soup(number))
 
     def get_expression_from_soup(self, number):
-        try:
 
-            return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
-                number * 5].span.span.string.strip() + self.organized_results[number * 5].span.contents[2].strip()
-        except:
-            try:
-
-                return self.organized_results[number * 5].span.contents[0].strip() + self.organized_results[
-                    number * 5].span.span.string.strip()
-            except:
-                try:
-
-                    return self.organized_results[number * 5].span.span.string.lstrip() + \
-                           self.organized_results[number * 5].span.contents[1].strip()
-                except:
-                    try:
-                        return self.organized_results[number * 5].span.string.strip()
-                    except:
-                        return self.organized_results[number * 5].span.span.string.strip()
-
-
+        return self.organized_results[number * 5].get_text().strip()
 
     def get_reading_from_soup(self, number):
-        if self.organized_results[(number * 5) + 1].span is not None:
-            try:
-                return self.organized_results[(number * 5) + 1].contents[0].strip() + self.organized_results[
-                    (number * 5) + 1].span.string + \
-                       self.organized_results[(number * 5) + 1].contents[2].rstrip()
-            except TypeError:
-                try:
-                    return self.organized_results[(number * 5) + 1].contents[0].strip() + self.organized_results[
-                        (number * 5) + 1].span.string
-                except TypeError:
-                    try:
-                        return self.organized_results[
-                                   (number * 5) + 1].span.string + \
-                               self.organized_results[(number * 5) + 1].contents[1].rstrip()
-                    except TypeError:
 
-                        return self.organized_results[(number * 5) + 1].span.string
-        else:
-            return self.organized_results[(number * 5) + 1].string.strip()
+        return self.organized_results[(number * 5) + 1].get_text().strip()
+
+    def get_note_from_soup(self, number):
+        return self.organized_results[(number * 5) + 3].get_text().strip()
 
     def get_meaning_from_soup(self, number):
         if self.organized_results[(number * 5) + 2].string is not None:
@@ -121,14 +89,15 @@ class Jp_to_eng_word_search_handler:
             try:
                 for index in range(0, 100):
                     if str(self.organized_results[(number * 5) + 2].contents[index]) == "<br/>":
-                        if self.organized_results[(number * 5) + 2].contents[index - 1].strip() !=';':
+                        if self.organized_results[(number * 5) + 2].contents[index - 1].strip() != ';':
 
                             result += self.organized_results[(number * 5) + 2].contents[index - 1].strip()
                             result += "\n"
                         else:
-                            result += self.organized_results[(number * 5) + 2].contents[index - 3].strip()+";"
+                            result += self.organized_results[(number * 5) + 2].contents[index - 3].strip() + ";"
                             result += "\n"
             except IndexError:
+
                 return result.strip()
 
 
@@ -137,7 +106,11 @@ class Search_result:
         self.expression = []
         self.reading = []
         self.meaning = []
+        self.note = []
         self.result_count = 0
+
+    def add_note(self, note):
+        self.note.append(note)
 
     def add_expression(self, word):
         self.expression.append(word)
@@ -147,6 +120,9 @@ class Search_result:
 
     def add_meaning(self, word):
         self.meaning.append(word)
+
+    def get_note_number(self, number):
+        return self.note[number]
 
     def get_expression_number(self, number):
         return self.expression[number]
@@ -171,6 +147,6 @@ if __name__ == '__main__':
     result = ducks.search(read)
     print(result.result_count)
     for x in range(0, result.result_count):
-        print(result.get_expression_number(x) + ":" + result.get_reading_number(x))
+        print(result.get_expression_number(x) + ":" + result.get_reading_number(x) + " " + result.get_note_number(x))
         print(result.get_meaning_number(x))
         pass

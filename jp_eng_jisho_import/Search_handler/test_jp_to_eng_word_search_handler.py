@@ -153,3 +153,4 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(
             u'lapse; annihilation;\nextinguishment; termination (e.g. of legal representation);\nvanishing',
             search_result_object.get_meaning_number(0))
+

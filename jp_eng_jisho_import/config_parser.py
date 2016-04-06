@@ -21,14 +21,4 @@ def write_config():
     cfgfile.write(deck_name)
     cfgfile.close()
 
-# write_config()
-#read_config()
 
-#deck_name = "かんじ"
-#write_config()
-# model_name = "asdasd"
-print deck_name
-
-
-
-# write_config()

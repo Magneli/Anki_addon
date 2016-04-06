@@ -12,6 +12,7 @@ import sys
 from platform import system
 
 from MakeAreas import makeAreas
+from Add_keybinds import  add_keybinds
 
 
 def runInterface():
@@ -26,7 +27,10 @@ class Interface(QWidget):
     def initUI(self):
         self.setGeometry(200, 200, 550, 550)
         self.setWindowTitle(u'鴨鴨')
+
         makeAreas(self)
-        self.htmlarea.setHtml(
-            "<html> <head> </head> <body> <p>yay </p> </body> </html>")
+        add_keybinds(self)
+
+   #     self.htmlarea.setHtml(
+        #    "<html> <head> </head> <body> <p>yay </p> </body> </html>")
         self.show()

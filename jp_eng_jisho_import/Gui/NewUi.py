@@ -30,7 +30,4 @@ class Interface(QWidget):
 
         makeAreas(self)
         add_keybinds(self)
-
-   #     self.htmlarea.setHtml(
-        #    "<html> <head> </head> <body> <p>yay </p> </body> </html>")
         self.show()

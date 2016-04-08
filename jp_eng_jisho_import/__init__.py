@@ -1,7 +1,7 @@
 from aqt import mw
 from aqt.qt import QAction, SIGNAL
 
-from user_interface import runOldUi
+from old_user_interface import runOldUi
 import Gui.NewUi
 
 

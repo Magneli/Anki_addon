@@ -43,7 +43,9 @@ def makehtml(search_result):
 def head():
     return "<html> <head> <title>Result</title> </head> <body> \n"
 
-numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9','0', 'Q', 'W','E','R','T','Y','U','I','O','P']
+
+numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P']
+
 
 def body(search_result):
     result = ""
@@ -51,24 +53,27 @@ def body(search_result):
     div_start_start = "\n<div style = \"font-size:40px;background-color:#ddd;border-radius:5px; vertical-align:top ;display: inline;margin:4px;\">\n"
     div_start_end = "\n</div>\n"
     for i in range(0, search_result.get_result_count()):
-        result +=start+div_start_start+numbers[i]+div_start_end
+        result += start + div_start_start + numbers[i] + div_start_end
         result += make_divs(search_result.get_expression_number(i), search_result.get_reading_number(i),
                             search_result.get_meaning_number(i), search_result.get_note_number(i))
     return result
 
 
 def make_divs(expression, reading, meaning, note):
-
     end = "\n</div>\n"
-    return  make_expression_reading(expression, reading) + make_note_bit(note) + make_meaning_bit(meaning) + end
+    return make_expression_reading(expression, reading) + make_note_bit(note) + make_meaning_bit(
+        meaning.replace('\n', "<br>")) + end
+
 
 def make_meaning_bit(meaning):
-    return "\n<div>"+meaning+"</div></div>\n"
+    return "\n<div>" + meaning + "</div></div>\n"
+
 
 def make_note_bit(note):
     start = "<div style = \"font-size:15px;background-color:#fff; display: inline-block;border-radius: 5px;padding:1px\">\n"
     end = "\n</div>\n"
-    return start+note+end
+    return start + note + end
+
 
 def make_expression_reading(expression, reading):
     start = "\n<div style = \"background-color:#ddd;display:inline-block;font-size:20px;\">\n<div>\n<div style = \"display: inline-block\">\n"

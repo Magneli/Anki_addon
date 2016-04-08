@@ -14,7 +14,7 @@ from platform import system
 
 import API
 
-from Hotkeys import Hotkeys
+from old_Hotkeys import Hotkeys
 from Search_handler import Jp_to_eng_word_search_handler
 
 

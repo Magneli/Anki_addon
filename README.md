@@ -8,14 +8,7 @@
 
 ## Status
 
-   * Fully functional, UI needs rework.
-   * Comes with a default setting for deck and template.
-   * UI might display incorrectly on unix systems.
-
-## Todo
-
-   * Rework the UI so that it displays properly on unix systems.
-
+   * Fully functional, could use some polish.
 
 ## Resources
 

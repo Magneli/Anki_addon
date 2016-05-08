@@ -50,10 +50,11 @@ numbers = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'Q', 'W', 'E', 'R',
 def body(search_result):
     result = ""
     start = "<div style=\"display:block;border-radius:5px;margin:5px\">\n"
+    table_start = "\n<table style=\"margin-left: 0px; margin-right: auto\">\n<tr>\n<td valign=\"top\">\n"
     div_start_start = "\n<div style = \"font-size:40px;background-color:#ddd;border-radius:5px; vertical-align:top ;display: inline;margin:4px;\">\n"
     div_start_end = "\n</div>\n"
     for i in range(0, search_result.get_result_count()):
-        result += start + div_start_start + numbers[i] + div_start_end
+        result += start + table_start+div_start_start + numbers[i] + div_start_end+"</td><td>"
         result += make_divs(search_result.get_expression_number(i), search_result.get_reading_number(i),
                             search_result.get_meaning_number(i), search_result.get_note_number(i))
     return result
@@ -62,7 +63,7 @@ def body(search_result):
 def make_divs(expression, reading, meaning, note):
     end = "\n</div>\n"
     return make_expression_reading(expression, reading) + make_note_bit(note) + make_meaning_bit(
-        meaning.replace('\n', "<br>")) + end
+        meaning.replace('\n', "<br>")) +"\n</td>\n </tr>\n  </table>\n"+ end
 
 
 def make_meaning_bit(meaning):
@@ -96,6 +97,5 @@ if __name__ == "__main__":
     searcher = Jp_to_eng_word_search_handler.Jp_to_eng_word_search_handler()
 
     result = searcher.search("食べる")
-    # print result.get_meaning_number(0)
 
     print makehtml(result)

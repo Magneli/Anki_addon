@@ -8,7 +8,7 @@ shortcut_list = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "Q", "W", "E"
                          "P"]
 
 def add_keybinds(widget):
-    widget.search_box.returnPressed.connect(make_searc_function(widget))
+    widget.search_box.returnPressed.connect(make_search_function(widget))
     widget.setDeck.returnPressed.connect(make_deck_select_function(widget))
 
     for i in range(0, 20):
@@ -48,7 +48,7 @@ def add_card_to_anki(exp, reading, meaning):
             if not anki_api_interface.is_card_in_collection(reading, reading):
                 anki_api_interface.add_word_card(reading, reading, meaning)
 
-def make_searc_function(widget):
+def make_search_function(widget):
     return lambda: on_search(widget)
 def on_search(widget):
     searcher = Jp_to_eng_word_search_handler.Jp_to_eng_word_search_handler()

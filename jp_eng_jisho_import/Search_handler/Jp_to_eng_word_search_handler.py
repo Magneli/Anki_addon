@@ -80,6 +80,21 @@ class Jp_to_eng_word_search_handler:
         return self.organized_results[(number * 5) + 3].get_text().strip()
 
     def get_meaning_from_soup(self, number):
+        #print self.organized_results[(number * 5) + 2].get_text().strip()
+        print  self.organized_results[(number * 5) + 2]
+        new = self.organized_results[(number * 5) + 2].get_text().strip()
+
+        if str.startswith(str(new), ("(Usually written using kana alone)")):
+            count = 0
+            for letter in new:
+                if letter == ')':
+                    break
+                count += 1
+            count += 1
+            new = new[count:]
+            #print "yay"+new.strip()
+            return new.strip()
+
         if self.organized_results[(number * 5) + 2].string is not None:
 
             return self.organized_results[(number * 5) + 2].string.strip()
@@ -137,7 +152,7 @@ class Search_result:
         return self.result_count
 
 
-read = "消滅"
+read = "蛙"
 
 if __name__ == '__main__':
     print('test {}'.format('code'))
@@ -146,7 +161,7 @@ if __name__ == '__main__':
     asd = ducks.search("asd")
     result = ducks.search(read)
     print(result.result_count)
-    for x in range(0, result.result_count):
+    for x in range(0, 2):
         print(result.get_expression_number(x) + ":" + result.get_reading_number(x) + " " + result.get_note_number(x))
         print(result.get_meaning_number(x))
         pass

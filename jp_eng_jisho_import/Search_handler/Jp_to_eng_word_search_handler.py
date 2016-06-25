@@ -80,40 +80,22 @@ class Jp_to_eng_word_search_handler:
         return self.organized_results[(number * 5) + 3].get_text().strip()
 
     def get_meaning_from_soup(self, number):
-        #print self.organized_results[(number * 5) + 2].get_text().strip()
-        print  self.organized_results[(number * 5) + 2]
-        new = self.organized_results[(number * 5) + 2].get_text().strip()
+        element = self.organized_results[(number * 5) + 2]
+        string = element.get_text("\n")
+        list = string.split("\n")
+        list = self.concatinate_same_lines(list)
+        list = filter(lambda a: a[-2:] != ": ",list)
+        list = map(lambda a:a.strip(),list)
+        result = "\n".join(list)
+        return result
 
-        if str.startswith(str(new), ("(Usually written using kana alone)")):
-            count = 0
-            for letter in new:
-                if letter == ')':
-                    break
-                count += 1
-            count += 1
-            new = new[count:]
-            #print "yay"+new.strip()
-            return new.strip()
-
-        if self.organized_results[(number * 5) + 2].string is not None:
-
-            return self.organized_results[(number * 5) + 2].string.strip()
-        else:
-
-            result = ""
-            try:
-                for index in range(0, 100):
-                    if str(self.organized_results[(number * 5) + 2].contents[index]) == "<br/>":
-                        if self.organized_results[(number * 5) + 2].contents[index - 1].strip() != ';':
-
-                            result += self.organized_results[(number * 5) + 2].contents[index - 1].strip()
-                            result += "\n"
-                        else:
-                            result += self.organized_results[(number * 5) + 2].contents[index - 3].strip() + ";"
-                            result += "\n"
-            except IndexError:
-
-                return result.strip()
+    def concatinate_same_lines(self,list):
+        if list.__len__()>1:
+            for i in range(1, list.__len__()):
+                if list[i-1][-2:] != ": " and list[i][-2:] != ": ":
+                    list[i] =list[i-1]+ list[i];
+                    list[i-1] = ": "
+        return list
 
 
 class Search_result:
@@ -152,16 +134,17 @@ class Search_result:
         return self.result_count
 
 
-read = "蛙"
+read = "*けたまわる"
 
 if __name__ == '__main__':
-    print('test {}'.format('code'))
+    # print('test {}'.format('code'))
 
     ducks = Jp_to_eng_word_search_handler()
     asd = ducks.search("asd")
     result = ducks.search(read)
-    print(result.result_count)
-    for x in range(0, 2):
-        print(result.get_expression_number(x) + ":" + result.get_reading_number(x) + " " + result.get_note_number(x))
+    # print(result.result_count)
+    for x in range(0, result.get_result_count()):
+        # print(result.get_expression_number(x) + ":" + result.get_reading_number(x) + " " + result.get_note_number(x))
+        # print result.get_reading_number(x)
         print(result.get_meaning_number(x))
         pass

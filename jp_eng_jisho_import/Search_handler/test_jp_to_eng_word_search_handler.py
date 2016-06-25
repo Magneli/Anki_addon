@@ -3,11 +3,7 @@
 from unittest import TestCase
 import time
 
-__author__ = 'Magne Limi'
-
 from Jp_to_eng_word_search_handler import Jp_to_eng_word_search_handler
-
-
 
 class TestJp_to_eng_word_search_handler(TestCase):
 
@@ -46,7 +42,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'かける', search_result_object.get_reading_number(0))
         self.maxDiff = None
         self.assertEqual(
-            u'to hang (e.g. picture); to hoist (e.g. sail); to raise (e.g. flag);\nto sit;\nto be partway (verb); to begin (but not complete);\nto take (time, money); to expend (money, time, etc.);\nto make (a call);\nto multiply;\nto secure (e.g. lock);\nto put on (glasses, etc.);\nto cover;\nto burden someone;\nto apply (insurance);\nto turn on (an engine, etc.); to set (a dial, an alarm clock, etc.);\nto put an effect (spell, anaesthetic, etc.) on;\nto hold an emotion for (pity, hope, etc.);\nto bind;\nto pour (or sprinkle, spray, etc.) onto;\nto argue (in court); to deliberate (in a meeting); to present (e.g. idea to a conference, etc.);\nto increase further;\nto catch (in a trap, etc.);\nto set atop;\nto erect (a makeshift building);\nto hold (a play, festival, etc.);\n(after -masu stem of verb) indicates (verb) is being directed to (someone)',
+            'to hang (e.g. picture); to hoist (e.g. sail); to raise (e.g. flag);\nto sit;\n() to be partway (verb); to begin (but not complete);\nto take (time, money); to expend (money, time, etc.);\nto make (a call);\nto multiply;\nto secure (e.g. lock);\nto put on (glasses, etc.);\nto cover;\nto burden someone;\nto apply (insurance);\nto turn on (an engine, etc.); to set (a dial, an alarm clock, etc.);\nto put an effect (spell, anaesthetic, etc.) on;\nto hold an emotion for (pity, hope, etc.);\nto bind;\nto pour (or sprinkle, spray, etc.) onto;\nto argue (in court); to deliberate (in a meeting); to present (e.g. idea to a conference, etc.);\nto increase further;\nto catch (in a trap, etc.);\nto set atop;\nto erect (a makeshift building);\nto hold (a play, festival, etc.);\n(Auxiliary verb) (after -masu stem of verb) indicates (verb) is being directed to (someone)',
             search_result_object.get_meaning_number(0))
 
     def test_simple_example(self):
@@ -89,13 +85,13 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'承る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(0))
 
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(1))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(1))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(1))
 
     def test_surrounding_wildcards(self):
@@ -105,13 +101,13 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'承る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(0))
 
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(1))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(1))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(1))
 
     def test_wildcard_expression(self):
@@ -121,7 +117,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(0))
 
     def test_surrounding_expression(self):
@@ -131,7 +127,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'受け賜る', search_result_object.get_expression_number(0))
         self.assertEqual(u'うけたまわる', search_result_object.get_reading_number(0))
         self.assertEqual(
-            u'to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
+            u'(Humble (kenjougo) language)  to hear; to be told; to know;\nto receive (order); to undertake; to comply; to take (a reservation, etc.)',
             search_result_object.get_meaning_number(0))
 
     def test_kaku(self):
@@ -151,6 +147,7 @@ class TestJp_to_eng_word_search_handler(TestCase):
         self.assertEqual(u'消滅', search_result_object.get_expression_number(0))
         self.assertEqual(u'しょうめつ', search_result_object.get_reading_number(0))
         self.assertEqual(
-            u'lapse; annihilation;\nextinguishment; termination (e.g. of legal representation);\nvanishing',
+            u'lapse; annihilation  (Physics term) ;\nextinguishment; termination (e.g. of legal representation);\n(Mathematical term)  vanishing',
             search_result_object.get_meaning_number(0))
+
 

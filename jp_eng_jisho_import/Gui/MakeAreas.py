@@ -20,7 +20,7 @@ def make_lower_area(widget):
 
     #path = u'C:/Users/Spaceducks/Documents/Anki/addons/jp_eng_jisho_import/Gui/style.css'
     widget.htmlarea.settings().setUserStyleSheetUrl(QUrl.fromLocalFile(path))
-    widget.htmlarea.setHtml("<html><head> </head><body><p>" + path + "</p></body> </html>")
+    widget.htmlarea.setHtml("<html><head> </head><body><p>Hello</p></body> </html>")
 
 
 def make_upper_area(widget):

@@ -6,7 +6,7 @@ def display_search_result(widget):
         display_results(widget)
         widget.htmlarea.setHtml(makehtml(widget.search_result))
     else:
-        widget.htmlarea.setHtml("wat none")
+        widget.htmlarea.setHtml("D:")
 
 
 def display_results(widget):

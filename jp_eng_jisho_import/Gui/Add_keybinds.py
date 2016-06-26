@@ -34,6 +34,7 @@ def makehotkeyfunction(widget, hotkey, number):
     return lambda:makehotkey(widget, hotkey, number)
 
 def makehotkey(widget, hotkey,number):
+
     if widget.search_result is not None and number < widget.search_result.get_result_count() and not anki_api_interface.is_card_in_collection(
             widget.search_result.get_expression_number(number), widget.search_result.get_reading_number(number)):
         add_card_to_anki(widget.search_result.get_expression_number(number),

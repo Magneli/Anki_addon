@@ -8,7 +8,7 @@
 
 ## Status
 
-   * Fully functional, could use some polish.
+   * Dosnt work with the new version of anki
 
 ## Resources
 
